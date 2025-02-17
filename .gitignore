@@ -1,0 +1,16 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.htaccess
+.env.backup
+.phpunit.result.cache
+/public/js
+/composer.lock
+/storage
+/public/images
+/public/uploads
+/public/media
+/store/debugbar
