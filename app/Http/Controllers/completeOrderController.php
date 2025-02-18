@@ -88,28 +88,28 @@ class completeOrderController extends Controller
         $redis->connect('127.0.0.1', 6379);  
 
       
-        if(!$redis->exists('data_order_new_')){
+        // if(!$redis->exists('data_order_new_')){
 
-            $domain = "dienmayai.com";
-            $context = stream_context_create(array(
-                'http' => array(
+        //     $domain = "dienmayai.com";
+        //     $context = stream_context_create(array(
+        //         'http' => array(
                     
-                    'method' => 'GET',
+        //             'method' => 'GET',
 
-                    'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
-                                "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
+        //             'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
+        //                         "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
                     
-                )
-            ));
+        //         )
+        //     ));
 
-            $link_api ='https://api.'.$domain.'/api/show-data-order-new?warehouse_id=1';
+        //     $link_api ='https://api.'.$domain.'/api/show-data-order-new?warehouse_id=1';
            
-            $response = file_get_contents($link_api, FALSE, $context);
+        //     $response = file_get_contents($link_api, FALSE, $context);
 
-            // $data_convert = json_decode($response);
+        //     // $data_convert = json_decode($response);
 
-            $redis->set('data_order_new_', $response);
-        }  
+        //     $redis->set('data_order_new_', $response);
+        // }  
 
         $data = $redis->get('data_order_new_');
        
