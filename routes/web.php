@@ -61,6 +61,9 @@ Route::get('update-id-product', 'sheetApiController@convertIDtoModel');
 Route::get('get-data-to-sheet', 'sheetApiController@runPriceToDrive');
 
 
+Route::get('get-data-order-new-to-api', 'sheetApiController@get_data_order_new');
+
+
 Route::group(['prefix' => 'admins'], function() {
 
     Route::post('get-data-to-sheet', 'sheetApiController@runPriceToDrive')->name('get_data_to_sheet');
