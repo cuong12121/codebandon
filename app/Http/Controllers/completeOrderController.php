@@ -106,9 +106,9 @@ class completeOrderController extends Controller
            
             $response = file_get_contents($link_api, FALSE, $context);
 
-            $data_convert = json_decode($response);
+            // $data_convert = json_decode($response);
 
-            $redis->set('data_order_new_', $data_convert);
+            $redis->set('data_order_new_', $response);
         }  
 
         $data = $redis->get('data_order_new_');
