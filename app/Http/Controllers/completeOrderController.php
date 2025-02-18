@@ -113,6 +113,11 @@ class completeOrderController extends Controller
 
         $data = $redis->get('data_order_new_');
 
+        echo"<pre>";
+
+            print_r($data);    
+        echo "</pre>";
+
         $end = microtime(true);
         $execution_time = $end - $start;
 
