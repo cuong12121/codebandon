@@ -108,10 +108,10 @@ class completeOrderController extends Controller
 
             $data_convert = json_decode($response);
 
-            $redis->set('data_kho_order', $data_convert);
+            $redis->set('data_order_new_', $data_convert);
         }  
 
-        $data = $redis->get('data_kho_order');
+        $data = $redis->get('data_order_new_');
        
         dd($data);
         
