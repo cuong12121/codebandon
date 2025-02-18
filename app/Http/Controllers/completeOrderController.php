@@ -81,25 +81,40 @@ class completeOrderController extends Controller
 
     protected function get_data_order_new()
     {
-        $domain = "dienmayai.com";
-        $context = stream_context_create(array(
-            'http' => array(
-                
-                'method' => 'GET',
-
-                'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
-                            "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
-                
-            )
-        ));
-
-        $link_api ='https://api.'.$domain.'/api/show-data-order-new?warehouse_id=1';
        
-        $response = file_get_contents($link_api, FALSE, $context);
 
-        $data_convert = json_decode($response);
+        $redis = new \Redis();
+        // Thiết lập kết nối
+        $redis->connect('127.0.0.1', 6379);  
 
-        dd($data_convert);
+      
+        if(!$redis->exists('data_order_new_')){
+
+            $domain = "dienmayai.com";
+            $context = stream_context_create(array(
+                'http' => array(
+                    
+                    'method' => 'GET',
+
+                    'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
+                                "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
+                    
+                )
+            ));
+
+            $link_api ='https://api.'.$domain.'/api/show-data-order-new?warehouse_id=1';
+           
+            $response = file_get_contents($link_api, FALSE, $context);
+
+            $data_convert = json_decode($response);
+
+            $redis->set('data_kho_order', $data_convert);
+        }  
+
+        $data = $redis->get('data_kho_order');
+       
+        dd($data);
+        
     }
 
 
