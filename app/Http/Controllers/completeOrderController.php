@@ -81,7 +81,7 @@ class completeOrderController extends Controller
 
     protected function get_data_order_new()
     {
-       
+        $start = microtime(true);
 
         $redis = new \Redis();
         // Thiết lập kết nối
@@ -112,8 +112,13 @@ class completeOrderController extends Controller
         // }  
 
         $data = $redis->get('data_order_new_');
+
+        $end = microtime(true);
+        $execution_time = $end - $start;
+
+        echo "Thời gian thực thi: " . number_format($execution_time, 6) . " giây";
        
-        dd($data);
+        // dd($data);
         
     }
 
