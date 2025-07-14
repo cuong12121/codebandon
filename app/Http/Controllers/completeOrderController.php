@@ -576,6 +576,7 @@ class completeOrderController extends Controller
 
         // Lưu lại
         $redis->set($key, json_encode($data));
+        return redirect()->back();
     }
 
     public function get_data_to_pm()

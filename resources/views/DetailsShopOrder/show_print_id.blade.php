@@ -138,20 +138,25 @@
             <?php 
 
                 $dem=0;
+                $data_json = $redis->get('sku_data');
+                $data = $data_json ? json_decode($data_json, true) : [];
+
+
                
            ?> 
             @foreach($data as $value)
             <?php 
                 $dem++;
                 $sku = $value['sku'].'-'.$value['color'].'-'.$value['size'];
+                $result_push = !empty($data[$sku]['quantity'])?$data[$sku]['quantity']:0
             ?>
             <tr>
                 <td>{{ $dem }}</td>
                 <td> {{ $sku }}</td>
                 <td>{{ $value['count'] }}</td>
                 <td>{{ !empty($sku_quantity[$sku])?$sku_quantity[$sku]:0 }}</td>
-                <td>0</td>
-                <td>Chưa bắn xong</td>
+                <td>{{ $result_push }}</td>
+                <td> {{ intval($result_push)===intval($value['count'])?'Đã bắn xong':'Chưa bắn xong' }} </td>
                 
             </tr>
             @endforeach
