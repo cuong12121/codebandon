@@ -138,6 +138,8 @@
             <?php 
 
                 $dem=0;
+                $redis = new Redis();
+                $redis->connect('127.0.0.1', 6379);
                 $data_json = $redis->get('sku_data');
                 $data = $data_json ? json_decode($data_json, true) : [];
 
