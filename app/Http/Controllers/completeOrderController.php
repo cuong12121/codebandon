@@ -114,22 +114,38 @@ class completeOrderController extends Controller
             $data_json = urlencode($data_json);
 
             $domain = "dienmayai.com";
-            $context = stream_context_create(array(
-                'http' => array(
-                    
-                    'method' => 'GET',
+            // Kết nối Redis (giả sử dùng phpredis)
+            $redis = new Redis();
+            $redis->connect('127.0.0.1', 6379); // hoặc host, port khác nếu cần
 
-                    'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
-                                "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
-                    
-                )
-            ));
+            // Tạo cache key (hash md5 để gọn)
+            $cache_key = 'order_api_cache:' . md5($data_json);
 
-            $link_api ='https://api.'.$domain.'/api/data-order-print?data='.$data_json;
-           
-            $response = file_get_contents($link_api, FALSE, $context);
+            // Kiểm tra cache
+            $cached_response = $redis->get($cache_key);
 
-            $response = json_decode($response, true);
+            if ($cached_response) {
+                // Dữ liệu đã có trong cache
+                $response = json_decode($cached_response, true);
+            } else {
+                // Chưa có cache, gọi API
+                $context = stream_context_create(array(
+                    'http' => array(
+                        'method' => 'GET',
+                        'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
+                                    "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
+                    )
+                ));
+
+                $link_api = 'https://api.' . $domain . '/api/data-order-print?data=' . urlencode($data_json);
+                $api_result = file_get_contents($link_api, false, $context);
+
+                // Giải mã JSON
+                $response = json_decode($api_result, true);
+
+                // Lưu vào Redis 10 phút (600 giây)
+                $redis->setex($cache_key, 1200, $api_result);
+            }
 
             
 
