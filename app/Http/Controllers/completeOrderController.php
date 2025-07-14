@@ -79,7 +79,7 @@ class completeOrderController extends Controller
         return view('admin.complete_order', compact('info_data'));
     }
 
-    public function view_history_print()
+    public function view_history_print($id = null)
     {
         $domain = "dienmayai.com";
         $context = stream_context_create(array(
