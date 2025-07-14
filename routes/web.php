@@ -70,8 +70,10 @@ Route::group(['prefix' => 'admins'], function() {
 
     Route::get('kho', 'khoController@index')->name('kho.admin');
 
-    Route::get('show-print', 'completeOrderController@view_history_print');
+    Route::get('/show-print/{id?}', [completeOrderController::class, 'view_history_print']);
 
+
+   
 
     Route::get('order-data', 'Backend\orderController@getdata');
 
