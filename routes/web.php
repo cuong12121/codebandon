@@ -70,15 +70,11 @@ Route::group(['prefix' => 'admins'], function() {
 
     Route::get('kho', 'khoController@index')->name('kho.admin');
 
+    Route::post('push-sku', 'completeOrderController@push_sku')->name('push-sku');
+
     Route::get('/show-print/{id?}', [completeOrderController::class, 'view_history_print'])->name('show-print');
 
-
-   
-
     Route::get('order-data', 'Backend\orderController@getdata');
-
-
-
 });    
 
 

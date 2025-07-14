@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Danh sách sản phẩm</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -97,7 +98,8 @@
     </style>
 </head>
 <body>
-    <form id="skuForm">
+    <form id="skuForm" method="post" action="{{ route('push-sku') }}">
+        @csrf
         <div class="form-group">
           <label for="sku">SKU</label>
           <input type="text" id="sku" name="sku" required autofocus>
@@ -106,6 +108,11 @@
         <div class="form-group">
           <label for="quantity">Số lượng</label>
           <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Sku thay thế</label>
+          <input type="text" id="sku_replace" name="sku_replace" value="" min="" required>
         </div>
 
         <button type="submit">Bắn</button>

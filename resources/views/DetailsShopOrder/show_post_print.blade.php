@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Danh sách sản phẩm</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         body {
             font-family: Arial, sans-serif;
