@@ -97,6 +97,8 @@ class completeOrderController extends Controller
        
         $response = file_get_contents($link_api, FALSE, $context);
 
+        $data = json_decode($response, true);
+
         dd($response);
         return view('DetailsShopOrder.show_post_print');
     }
