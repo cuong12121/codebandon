@@ -141,7 +141,7 @@
                 $redis = new Redis();
                 $redis->connect('127.0.0.1', 6379);
                 $data_json = $redis->get('sku_data');
-                $data = $data_json ? json_decode($data_json, true) : [];
+                $datass = $data_json ? json_decode($data_json, true) : [];
 
 
                
@@ -150,7 +150,7 @@
             <?php 
                 $dem++;
                 $sku = $value['sku'].'-'.$value['color'].'-'.$value['size'];
-                $result_push = !empty($data[$sku]['quantity'])?$data[$sku]['quantity']:0
+                $result_push = !empty($datass[$sku]['quantity'])?$datass[$sku]['quantity']:0
             ?>
             <tr>
                 <td>{{ $dem }}</td>
