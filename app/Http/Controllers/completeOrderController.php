@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use DB;
 
+use PHPExcel_IOFactory;
+
 use Carbon\Carbon;
 
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -98,6 +100,33 @@ class completeOrderController extends Controller
         $response = file_get_contents($link_api, FALSE, $context);
 
         $data = json_decode($response, true);
+
+        $filePath = storage_path('app/excels/tt.xlsx');
+
+        // Load file file tồn
+        $objPHPExcel = PHPExcel_IOFactory::load($filePath);
+
+        // Lấy sheet đầu tiên
+        $sheet = $objPHPExcel->getActiveSheet();
+
+        $data = [];
+
+        foreach ($sheet->getRowIterator() as $row) {
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(false);
+
+            $rowData = [];
+            foreach ($cellIterator as $cell) {
+                $rowData[] = $cell->getValue();
+            }
+
+            $data[] = $rowData;
+        }
+        dd($data);
+
+        // endload
+
+
 
 
         if ($id) {
