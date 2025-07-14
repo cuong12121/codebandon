@@ -111,6 +111,8 @@ class completeOrderController extends Controller
             $get_data['house_id'] = $house_id;
             $data_json = json_encode($get_data);
 
+            $data_json = urlencode($data_json);
+
             $domain = "dienmayai.com";
             $context = stream_context_create(array(
                 'http' => array(
