@@ -82,7 +82,7 @@ class completeOrderController extends Controller
     public function view_history_print()
     {
 
-        return view('DetailsShopOrder.show_post_print')
+        return view('DetailsShopOrder.show_post_print');
     }
 
     protected function get_data_order_new()
