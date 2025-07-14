@@ -79,6 +79,12 @@ class completeOrderController extends Controller
         return view('admin.complete_order', compact('info_data'));
     }
 
+    public function view_history_print()
+    {
+
+        return view('DetailsShopOrder.show_post_print')
+    }
+
     protected function get_data_order_new()
     {
         $start = microtime(true);
