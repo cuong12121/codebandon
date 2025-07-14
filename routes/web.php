@@ -1,5 +1,5 @@
 <?php
-App\Http\Controllers\completeOrderController;
+use App\Http\Controllers\completeOrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
