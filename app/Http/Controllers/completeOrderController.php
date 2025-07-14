@@ -99,8 +99,8 @@ class completeOrderController extends Controller
 
         $data = json_decode($response, true);
 
-        dd($data);
-        return view('DetailsShopOrder.show_post_print');
+       
+        return view('DetailsShopOrder.show_post_print', compact('data'));
     }
 
     protected function get_data_order_new()
