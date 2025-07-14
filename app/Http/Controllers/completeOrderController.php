@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use DB;
 
-use PHPExcel_IOFactory;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 use Carbon\Carbon;
 
