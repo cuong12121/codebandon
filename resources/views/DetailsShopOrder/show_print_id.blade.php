@@ -112,7 +112,7 @@
 
         <div class="form-group">
           <label for="quantity">Sku thay thế</label>
-          <input type="text" id="sku_replace" name="sku_replace" value="" min="" required>
+          <input type="text" id="sku_replace" name="sku_replace" value="" min="">
         </div>
 
         <button type="submit">Bắn</button>
