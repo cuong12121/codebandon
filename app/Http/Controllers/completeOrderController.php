@@ -552,9 +552,9 @@ class completeOrderController extends Controller
         $redis = new \Redis();
         $redis->connect('127.0.0.1', 6379); // hoặc dùng unix socket
 
-        $sku = $_POST['sku'];
+        $sku = trim($_POST['sku']);
         $quantity = (int)$_POST['quantity'];
-        $sku_replace = $_POST['sku_replace'];
+        $sku_replace = trim($_POST['sku_replace']);
 
         $key = "sku_data"; // Bạn có thể thêm session_id vào nếu cần tách riêng user
 
