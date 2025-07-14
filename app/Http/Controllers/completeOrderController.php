@@ -118,6 +118,14 @@ class completeOrderController extends Controller
         print_r($data);
         echo "</pre>";
 
+        $inventory = [];
+
+        for ($i = 2; $i < count($data); $i++) {
+            $itemCode = $data[$i][0];
+            $quantity = $data[$i][1];
+            $inventory[$itemCode] = $quantity;
+        }
+
         // Lấy sheet đầu tiên
         // $sheet = $objPHPExcel->getActiveSheet();
 
@@ -192,7 +200,7 @@ class completeOrderController extends Controller
             
 
             // Nếu có ID thì trả về view chi tiết
-            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response]);
+            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory]);
         } else {
             // Nếu không có ID thì trả về danh sách
             return view('DetailsShopOrder.show_post_print', compact('data'));

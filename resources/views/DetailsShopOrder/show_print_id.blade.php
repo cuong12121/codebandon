@@ -136,12 +136,15 @@
             @foreach($data as $value)
             <?php 
                 $dem++;
+                $sku = $value['sku'].'-'.$value['color'].'-'.$value['size'];
+
+                $sku_quantity = !empty($sku_quantity[$sku])?$sku_quantity[$sku]:0;
             ?>
             <tr>
                 <td>{{ $dem }}</td>
                 <td>{{ $value['sku'] }}-{{ $value['color'] }}-{{ $value['size'] }} </td>
                 <td>{{ $value['count'] }}</td>
-                <td>1</td>
+                <td>{{  $sku_quantity }}</td>
                 <td>0</td>
                 <td>Chưa bắn xong</td>
                 
