@@ -110,7 +110,7 @@
 
             <button type="submit">Bắn</button>
         </form>
-    <h1>Danh sách file in</h1>
+    <h1>Danh sách sản phẩm</h1>
 
     <table>
         <thead>

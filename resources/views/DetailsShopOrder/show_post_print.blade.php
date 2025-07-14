@@ -45,7 +45,7 @@
 </head>
 <body>
 
-    <h1>Danh sách sản phẩm</h1>
+    <h1>Danh sách file in</h1>
 
     <table>
         <thead>
