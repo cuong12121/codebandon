@@ -112,6 +112,10 @@
         </form>
     <h1>Danh sách sản phẩm</h1>
 
+    <?php 
+        dd($data);
+    ?>
+
     <table>
         <thead>
             <tr>
