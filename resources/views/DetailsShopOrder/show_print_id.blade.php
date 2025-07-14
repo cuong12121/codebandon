@@ -150,7 +150,8 @@
             <?php 
                 $dem++;
                 $sku = $value['sku'].'-'.$value['color'].'-'.$value['size'];
-                $result_push = !empty($datass[$sku]['quantity'])?$datass[$sku]['quantity']:0
+                $result_push = !empty($datass[$sku]['quantity'])?$datass[$sku]['quantity']:0;
+
             ?>
             <tr>
                 <td>{{ $dem }}</td>
@@ -158,13 +159,20 @@
                 <td>{{ $value['count'] }}</td>
                 <td>{{ !empty($sku_quantity[$sku])?$sku_quantity[$sku]:0 }}</td>
                 <td>{{ $result_push }}</td>
-                <td> {{ intval($result_push)===intval($value['count'])?'Đã bắn xong':'Chưa bắn xong' }} </td>
+                <td> {{ intval($result_push)===intval($item_total[$sku])?'Đã bắn xong':'Chưa bắn xong' }} </td>
                 
             </tr>
             @endforeach
             @endif
         </tbody>
     </table>
+<script>
+document.getElementById('sku_replace').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault(); // Chặn không cho form submit
+    }
+});
+</script>    
 
 </body>
 </html>
