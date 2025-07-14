@@ -101,8 +101,34 @@ class completeOrderController extends Controller
 
 
         if ($id) {
+            $created_time = $_GET['created_time'];
+            $platform_id = $_GET['platform_id'];
+            $warehouse_id = $_GET['warehouse_id'];
+            $house_id = $_GET['house_id'];
+            $get_data['platform_id'] = $platform_id;
+            $get_data['warehouse_id'] = $warehouse_id;
+            $get_data['created_time'] = $created_time;
+            $get_data['house_id'] = $house_id;
+            $data_json = json_encode($get_data);
+
+            $domain = "dienmayai.com";
+            $context = stream_context_create(array(
+                'http' => array(
+                    
+                    'method' => 'GET',
+
+                    'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
+                                "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
+                    
+                )
+            ));
+
+            $link_api ='https://api.'.$domain.'/api/data-order-print?data='.$data_json;
+           
+            $response = file_get_contents($link_api, FALSE, $context);
+
             // Nếu có ID thì trả về view chi tiết
-            return view('DetailsShopOrder.show_print_id', ['id' => $id]);
+            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response]);
         } else {
             // Nếu không có ID thì trả về danh sách
             return view('DetailsShopOrder.show_post_print', compact('data'));
