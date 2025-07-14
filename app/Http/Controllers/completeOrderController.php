@@ -549,7 +549,7 @@ class completeOrderController extends Controller
 
     public function push_sku(Request $request)
     {
-        $redis = new Redis();
+        $redis = new \Redis();
         $redis->connect('127.0.0.1', 6379); // hoặc dùng unix socket
 
         $sku = $_POST['sku'];
