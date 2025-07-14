@@ -129,7 +129,9 @@ class completeOrderController extends Controller
            
             $response = file_get_contents($link_api, FALSE, $context);
 
-            dd(json_decode($response, true));
+            $response = json_decode($response, true);
+
+            
 
             // Nếu có ID thì trả về view chi tiết
             return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response]);
