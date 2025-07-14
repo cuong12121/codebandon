@@ -104,7 +104,19 @@ class completeOrderController extends Controller
         $filePath = storage_path('app/excels/tt.xlsx');
 
         // Load file file tồn
-        $objPHPExcel = PHPExcel_IOFactory::load($filePath);
+        
+        // Load file
+        $spreadsheet = IOFactory::load($filePath);
+
+        // Lấy sheet đầu tiên
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Lấy toàn bộ dữ liệu thành mảng
+        $data = $sheet->toArray();
+
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
 
         // Lấy sheet đầu tiên
         // $sheet = $objPHPExcel->getActiveSheet();
