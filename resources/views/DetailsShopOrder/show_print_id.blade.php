@@ -97,23 +97,22 @@
     </style>
 </head>
 <body>
-        <form id="skuForm">
-            <div class="form-group">
-              <label for="sku">SKU</label>
-              <input type="text" id="sku" name="sku" required autofocus>
-            </div>
+    <form id="skuForm">
+        <div class="form-group">
+          <label for="sku">SKU</label>
+          <input type="text" id="sku" name="sku" required autofocus>
+        </div>
 
-            <div class="form-group">
-              <label for="quantity">Số lượng</label>
-              <input type="number" id="quantity" name="quantity" value="1" min="1" required>
-            </div>
+        <div class="form-group">
+          <label for="quantity">Số lượng</label>
+          <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+        </div>
 
-            <button type="submit">Bắn</button>
-        </form>
+        <button type="submit">Bắn</button>
+    </form>
+    <a href="{{ route('show-print') }}">Danh sách in</a>
     <h1>Danh sách sản phẩm</h1>
 
-   
-    
     <table>
         <thead>
             <tr>
