@@ -99,8 +99,16 @@ class completeOrderController extends Controller
 
         $data = json_decode($response, true);
 
+
+        if ($id) {
+            // Nếu có ID thì trả về view chi tiết
+            return view('DetailsShopOrder.show_print_id', ['id' => $id]);
+        } else {
+            // Nếu không có ID thì trả về danh sách
+            return view('DetailsShopOrder.show_post_print', compact('data'));
+        }
        
-        return view('DetailsShopOrder.show_post_print', compact('data'));
+        
     }
 
     protected function get_data_order_new()
