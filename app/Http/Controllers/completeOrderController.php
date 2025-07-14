@@ -107,22 +107,22 @@ class completeOrderController extends Controller
         $objPHPExcel = PHPExcel_IOFactory::load($filePath);
 
         // Lấy sheet đầu tiên
-        $sheet = $objPHPExcel->getActiveSheet();
+        // $sheet = $objPHPExcel->getActiveSheet();
 
-        $data = [];
+        // $data = [];
 
-        foreach ($sheet->getRowIterator() as $row) {
-            $cellIterator = $row->getCellIterator();
-            $cellIterator->setIterateOnlyExistingCells(false);
+        // foreach ($sheet->getRowIterator() as $row) {
+        //     $cellIterator = $row->getCellIterator();
+        //     $cellIterator->setIterateOnlyExistingCells(false);
 
-            $rowData = [];
-            foreach ($cellIterator as $cell) {
-                $rowData[] = $cell->getValue();
-            }
+        //     $rowData = [];
+        //     foreach ($cellIterator as $cell) {
+        //         $rowData[] = $cell->getValue();
+        //     }
 
-            $data[] = $rowData;
-        }
-        dd($data);
+        //     $data[] = $rowData;
+        // }
+        dd($filePath);
 
         // endload
 
