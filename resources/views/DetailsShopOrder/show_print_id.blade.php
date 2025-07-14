@@ -127,7 +127,7 @@
             </tr>
         </thead>
         <tbody>
-            @if(!empty($data))
+            @if(!empty($data) && count($data)>0)
             <?php 
 
                 $dem=0;
@@ -146,6 +146,7 @@
                 <td>Chưa bắn xong</td>
                 
             </tr>
+            @endforeach
             @endif
         </tbody>
     </table>
