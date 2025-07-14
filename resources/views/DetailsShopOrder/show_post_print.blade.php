@@ -117,7 +117,7 @@
                 <td>{{ $dem }}</td>
                 <td>{{ $gio_array[$value['house_id']] }}</td>
                 <td>{{ $san_array[$value['platform_id']] }}</td>
-                <td>$kho_array[{{ $value['warehouse_id']] }}</td>
+                <td>{{ $kho_array[$value['warehouse_id']] }}</td>
                 <td>Đủ hàng</td>
                 <td>
                     <a href="{{ route('show-print', $value['id']) }}">Duyệt hàng</a> 
