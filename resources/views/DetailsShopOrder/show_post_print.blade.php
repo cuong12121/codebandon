@@ -120,7 +120,7 @@
                 <td>{{ $kho_array[$value['warehouse_id']] }}</td>
                 <td>Đủ hàng</td>
                 <td>
-                    <a href="{{ route('show-print', $value['id']) }}&platform_id={{ $value['platform_id'] }}&warehouse_id={{ $value['warehouse_id'] }}&house_id={{ $value['house_id'] }}&created_time={{ $value['created_time']->format('Y-m-d') }}">Duyệt hàng</a> 
+                    <a href="{{ route('show-print', $value['id']) }}&platform_id={{ $value['platform_id'] }}&warehouse_id={{ $value['warehouse_id'] }}&house_id={{ $value['house_id'] }}&created_time={{ $value['created_time'] }}">Duyệt hàng</a> 
                 
                 </td>
             </tr>
