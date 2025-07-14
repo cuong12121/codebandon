@@ -99,7 +99,7 @@ class completeOrderController extends Controller
 
         $data = json_decode($response, true);
 
-        dd($response);
+        dd($data);
         return view('DetailsShopOrder.show_post_print');
     }
 
