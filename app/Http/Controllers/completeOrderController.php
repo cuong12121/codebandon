@@ -124,7 +124,7 @@ class completeOrderController extends Controller
             $inventory[$itemCode] = $quantity;
         }
 
-        dd($inventory);
+        // dd($inventory);
 
         // Lấy sheet đầu tiên
         // $sheet = $objPHPExcel->getActiveSheet();
