@@ -136,11 +136,11 @@
             @foreach($data as $value)
             <?php 
                 $dem++;
-                
+                $sku = $value['sku'].'-'.$value['color'].'-'.$value['size'];
             ?>
             <tr>
                 <td>{{ $dem }}</td>
-                <td>{{ $value['sku'] }}-{{ $value['color'] }}-{{ $value['size'] }} </td>
+                <td> {{ $sku }}</td>
                 <td>{{ $value['count'] }}</td>
                 <td>0</td>
                 <td>0</td>
