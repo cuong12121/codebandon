@@ -137,7 +137,7 @@ class completeOrderController extends Controller
                     )
                 ));
 
-                $link_api = 'https://api.' . $domain . '/api/data-order-print?data=' . urlencode($data_json);
+                $link_api = 'https://api.' . $domain . '/api/data-order-print?data=' . $data_json;
                 $api_result = file_get_contents($link_api, false, $context);
 
                 dd($api_result);
