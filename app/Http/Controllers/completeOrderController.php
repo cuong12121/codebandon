@@ -114,9 +114,7 @@ class completeOrderController extends Controller
         // Lấy toàn bộ dữ liệu thành mảng
         $data = $sheet->toArray();
 
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
+       
 
         $inventory = [];
 
@@ -142,7 +140,7 @@ class completeOrderController extends Controller
 
         //     $data[] = $rowData;
         // }
-        dd($filePath);
+       
 
         // endload
 
