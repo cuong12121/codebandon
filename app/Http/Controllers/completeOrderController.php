@@ -81,7 +81,23 @@ class completeOrderController extends Controller
 
     public function view_history_print()
     {
+        $domain = "dienmayai.com";
+        $context = stream_context_create(array(
+            'http' => array(
+                
+                'method' => 'GET',
 
+                'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
+                            "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
+                
+            )
+        ));
+
+        $link_api ='https://api.'.$domain.'/api/show-data-order-new?warehouse_id=1';
+       
+        $response = file_get_contents($link_api, FALSE, $context);
+
+        dd($response);
         return view('DetailsShopOrder.show_post_print');
     }
 
