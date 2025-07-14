@@ -68,7 +68,7 @@ Route::group(['prefix' => 'admins'], function() {
 
     Route::post('get-data-to-sheet', 'sheetApiController@runPriceToDrive')->name('get_data_to_sheet');
 
-    Route::get('kho', 'khoController@index')->name('kho.admin');
+    Route::post('kho', 'khoController@index')->name('kho.admin');
 
     Route::post('push-sku', 'completeOrderController@push_sku')->name('push-sku');
 
