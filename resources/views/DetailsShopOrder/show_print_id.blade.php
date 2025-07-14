@@ -142,7 +142,7 @@
                 <td>{{ $dem }}</td>
                 <td>{{ $value['sku'] }}-{{ $value['color'] }}-{{ $value['size'] }} </td>
                 <td>{{ $value['count'] }}</td>
-                <td>{{  $sku_quantity }}</td>
+                <td>0</td>
                 <td>0</td>
                 <td>Chưa bắn xong</td>
                 
