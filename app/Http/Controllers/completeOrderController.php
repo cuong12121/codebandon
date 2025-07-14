@@ -93,7 +93,7 @@ class completeOrderController extends Controller
             )
         ));
 
-        $link_api ='https://api.'.$domain.'/api/show-data-order-new?warehouse_id=1';
+        $link_api ='https://api.'.$domain.'/api/history_print';
        
         $response = file_get_contents($link_api, FALSE, $context);
 
