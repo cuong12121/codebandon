@@ -138,7 +138,7 @@
                 $dem++;
                 
 
-                // $sku_quantity = !empty($sku_quantity[$sku])?$sku_quantity[$sku]:0;
+               
             ?>
             <tr>
                 <td>{{ $dem }}</td>
