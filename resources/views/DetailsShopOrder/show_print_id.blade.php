@@ -117,8 +117,8 @@
             <tr>
                 <th>STT</th>
                 <th>Sku</th>
-                <th>Số lượng</th>
-                <th>Tồn</th>
+                <th>Số lượng file in</th>
+                <th>Số lượng tồn</th>
                 <th>Số lượng đã bắn</th>
                 <th>Trạng thái</th>
                
