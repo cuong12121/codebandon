@@ -112,15 +112,15 @@ class completeOrderController extends Controller
         $sheet = $spreadsheet->getActiveSheet();
 
         // Lấy toàn bộ dữ liệu thành mảng
-        $data = $sheet->toArray();
+        $datas = $sheet->toArray();
 
        
 
         $inventory = [];
 
-        for ($i = 2; $i < count($data); $i++) {
-            $itemCode = $data[$i][0];
-            $quantity = $data[$i][1];
+        for ($i = 2; $i < count($datas); $i++) {
+            $itemCode = $datas[$i][0];
+            $quantity = $datas[$i][1];
             $inventory[$itemCode] = $quantity;
         }
 
