@@ -110,7 +110,8 @@
 
         <button type="submit">Bắn</button>
     </form>
-    <a href="{{ route('show-print') }}">Danh sách in</a>
+    <br>
+    <a href="{{ route('show-print') }}"><h3>Danh sách in </h3></a>
     <h1>Danh sách sản phẩm</h1>
 
     <table>
