@@ -127,16 +127,26 @@
             </tr>
         </thead>
         <tbody>
+            @if(!empty($data))
+            <?php 
+
+                $dem=0;
+               
+           ?> 
+            @foreach($data as $value)
+            <?php 
+                $dem++;
+            ?>
             <tr>
+                <td>{{ $dem }}</td>
+                <td>{{ $value['sku'] }}-{{ $value['color'] }}-{{ $value['size'] }} </td>
+                <td>{{ $value['count'] }}</td>
                 <td>1</td>
-                <td>7h30</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+                <td>0</td>
                 <td>Chưa bắn xong</td>
                 
             </tr>
-            
+            @endif
         </tbody>
     </table>
 
