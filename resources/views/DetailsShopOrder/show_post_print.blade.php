@@ -59,18 +59,25 @@
             </tr>
         </thead>
         <tbody>
+            <?php 
+                $dem = 0;
+            ?>
+            @foreach($data as $value)
+            <?php 
+                $dem++;
+            ?>
             <tr>
-                <td>1</td>
-                <td>7h30</td>
-                <td>Shopee</td>
-                <td>VLA</td>
+                <td>{{ $dem }}</td>
+                <td>{{ $value['house_id'] }}</td>
+                <td>{{ $value['platform_id'] }}</td>
+                <td>{{ $value['warehouse_id'] }}</td>
                 <td>Đủ hàng</td>
                 <td>
-                    <a href="sua.html?id=1">Duyệt hàng</a> 
+                    <a href="{{ route('show-print', $value['id']) }}">Duyệt hàng</a> 
                 
                 </td>
             </tr>
-            
+            @endforeach
         </tbody>
     </table>
 
