@@ -257,12 +257,9 @@ class completeOrderController extends Controller
         $redis = new \Redis();
         $id = $request->id;
         $key = "sku_data_".$id;
-        $data_json = $redis->get($key);
-        $data = $data_json ? json_decode($data_json, true) : [];
-
-        dd($data);
-
-
+        dd($key);
+        // $data_json = $redis->get($key);
+        // $data = $data_json ? json_decode($data_json, true) : [];
     }
 
     protected function get_data_order_new()
