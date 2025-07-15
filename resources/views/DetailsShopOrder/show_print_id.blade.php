@@ -188,6 +188,7 @@
         @csrf
         <input type="hidden" name="id" value="{{ $id }}">
         <input type="hidden" name="key_cache" value="{{ $cache_key }}">
+        <input type="hidden" name="warehouse_id" value="{{ $warehouse_id }}">
         <button type="submit" style="background-color: red;">Xác nhận hoàn thành</button>
     </form>
     <br>

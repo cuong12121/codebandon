@@ -106,46 +106,50 @@ class completeOrderController extends Controller
 
         // Load file file tồn
         
-        // Load file
-        $spreadsheet = IOFactory::load($filePath);
-
-        // Lấy sheet đầu tiên
-        $sheet = $spreadsheet->getActiveSheet();
-
-        // Lấy toàn bộ dữ liệu thành mảng
-        $datas = $sheet->toArray();
-
-        $inventory = [];
-
-        for ($i = 2; $i < count($datas); $i++) {
-            $itemCode = $datas[$i][0];
-            $quantity = $datas[$i][1];
-            $inventory[$itemCode] = $quantity;
-        }
-
-        $inventory_total = [];
-
-        for ($i = 1; $i < count($datas); $i++) {
-            $itemCode = $datas[$i][0];
-            $quantity = (int) $datas[$i][1];
-
-            if (isset($inventory_total[$itemCode])) {
-                $inventory_total[$itemCode] += $quantity;
-            } else {
-                $inventory_total[$itemCode] = $quantity;
-            }
-        }
-
-        $redis->connect('127.0.0.1', 6379);
-
-        // Chuyển mảng thành JSON để lưu vào Redis
-        $redis->setex('stock_data', 64800, json_encode($inventory_total));
+        
 
        
         $data_redis = $redis->get('stock_data');
     
 
         if ($id) {
+
+            // Load file
+            $spreadsheet = IOFactory::load($filePath);
+
+            // Lấy sheet đầu tiên
+            $sheet = $spreadsheet->getActiveSheet();
+
+            // Lấy toàn bộ dữ liệu thành mảng
+            $datas = $sheet->toArray();
+
+            $inventory = [];
+
+            for ($i = 2; $i < count($datas); $i++) {
+                $itemCode = $datas[$i][0];
+                $quantity = $datas[$i][1];
+                $inventory[$itemCode] = $quantity;
+            }
+
+            $inventory_total = [];
+
+            for ($i = 1; $i < count($datas); $i++) {
+                $itemCode = $datas[$i][0];
+                $quantity = (int) $datas[$i][1];
+
+                if (isset($inventory_total[$itemCode])) {
+                    $inventory_total[$itemCode] += $quantity;
+                } else {
+                    $inventory_total[$itemCode] = $quantity;
+                }
+            }
+
+            $redis->connect('127.0.0.1', 6379);
+
+            // Chuyển mảng thành JSON để lưu vào Redis
+            $redis->setex('stock_data_'.$get_data['warehouse_id'], 64800, json_encode($inventory_total));
+
+
             $created_time = $_GET['created_time'];
             $platform_id = $_GET['platform_id'];
             $warehouse_id = $_GET['warehouse_id'];
@@ -211,7 +215,7 @@ class completeOrderController extends Controller
             ->all();
 
             // Nếu có ID thì trả về view chi tiết
-            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$inventory_total, 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key]);
+            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$inventory_total, 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key 'warehouse_id'=>$get_data['warehouse_id']]);
         } else {
             // Nếu không có ID thì trả về danh sách
             return view('DetailsShopOrder.show_post_print', compact('data'));
@@ -257,11 +261,12 @@ class completeOrderController extends Controller
         $redis = new \Redis();
         $redis->connect('127.0.0.1', 6379); 
         $id = $request->id;
+        $warehouse_id = $request->warehouse_id;
         $key = "sku_data_".$id;
-        $key_ton = $request->key_cache;
+        $key_ton = 'stock_data_'.$warehouse_id;
         $data_json = $redis->get($key);
         $data = $data_json ? json_decode($data_json, true) : [];
-        $data_ton = $redis->get($key_ton);
+        $data_ton = json_decode($redis->get($key_ton),true);
         dd($data_ton);
         // dd($data);
 
