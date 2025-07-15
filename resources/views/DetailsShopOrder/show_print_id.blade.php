@@ -281,7 +281,12 @@
             @endif
         </tbody>
     </table>
+<?php 
+    dd(Redis::get('stock_data'));
+    die;
+    ?>    
 <script>
+
 document.getElementById('sku_replace').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
         e.preventDefault(); // Chặn không cho form submit
@@ -294,10 +299,7 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
     }
 });
 </script>  
-<?php 
-    dd(Redis::get('stock_data'));
-    die;
-    ?>
+
 
 <script>
 
