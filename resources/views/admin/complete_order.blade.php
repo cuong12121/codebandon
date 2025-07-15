@@ -18,7 +18,9 @@
 	
     <!-- <a href="{{ route('tracking') }}"><h3>tracking</h3></a>   -->
 
-    <a href="{{ route('logout') }}">đăng xuất</a>   
+    <a href="{{ route('logout') }}">đăng xuất</a>  
+
+    <a href="{{ route('show-print') }}"><h3>Danh sách in </h3></a>
 
     <h1>Hệ thống tạm thời bảo trì, xin quay lại sau</h1>
     <div class="modal-menu-full-screen"></div>

@@ -325,7 +325,7 @@ class completeOrderController extends Controller
 
         $redis->set("order_packed_{$id}", 'packed');
 
-        return redirect()->back()->with('success', "Đã duyệt hàng cho đơn #{$id}");
+        return redirect()->back()->with('success', "Đã duyệt hàng với id in = #{$id}");
        
 
   

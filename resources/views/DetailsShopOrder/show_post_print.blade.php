@@ -108,19 +108,26 @@
                     12 => "Giao hàng tiết kiệm",
                     13 => "Giao hàng nhanh"
                 ];
-                                $dem = 0;
+                $dem = 0;
+                $redis = new Redis();
+
+                $redis->connect('127.0.0.1', 6379);
             ?>
             @foreach($data as $value)
             <?php 
                 $dem++;
                 $datePart = explode(' ', $value['created_time'])[0];
+
+
+                $key_redis_push = 'order_packed_'.$value['id']; // hoặc 'order_packed_' . $orderId nếu bạn có ID đơn hàng
+                $keyExists = $redis->exists($key_redis_push);
             ?>
             <tr>
                 <td>{{ $dem }}</td>
                 <td>{{ $gio_array[$value['house_id']] }}</td>
                 <td>{{ $san_array[$value['platform_id']] }}</td>
                 <td>{{ $kho_array[$value['warehouse_id']] }}</td>
-                <td>Đủ hàng</td>
+                <td>{{ $keyExists?'Đã kiểm kê':'Chưa kiểm kê'  }}</td>
                 <td>
                     <a href="{{ route('show-print', $value['id']) }}?platform_id={{ $value['platform_id'] }}&warehouse_id={{ $value['warehouse_id'] }}&house_id={{ $value['house_id'] }}&created_time={{ $datePart }}">Duyệt hàng</a> 
                 
