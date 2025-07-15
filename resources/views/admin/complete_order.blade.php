@@ -22,7 +22,7 @@
 
     <a href="{{ route('show-print') }}"><h3>Danh sách in </h3></a>
 
-    <h1>Hệ thống tạm thời bảo trì, xin quay lại sau</h1>
+    <!-- <h1>Hệ thống tạm thời bảo trì, xin quay lại sau</h1> -->
     <div class="modal-menu-full-screen"></div>
     <div id="wrapper" @if(empty($kt)) style="display: none;" @endif>
        
