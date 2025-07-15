@@ -161,6 +161,8 @@ class completeOrderController extends Controller
 
             $datas = json_decode($redis->get($key_ton), true);
 
+            dd($datas);
+
             
             $inventory = [];
 
