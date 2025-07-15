@@ -281,10 +281,7 @@
             @endif
         </tbody>
     </table>
-<?php 
-    dd(Redis::get('stock_data'));
-    die;
-    ?>    
+
 <script>
 
 document.getElementById('sku_replace').addEventListener('keydown', function(e) {
