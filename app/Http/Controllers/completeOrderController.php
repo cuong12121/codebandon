@@ -111,20 +111,35 @@ class completeOrderController extends Controller
 
         if ($id) {
 
-           
-            // Load file
-            $spreadsheet = IOFactory::load($filePath);
+            // Key Redis bạn muốn dùng
+            $redisKey = 'excel_data_stock';
 
-            // Lấy sheet đầu tiên
-            $sheet = $spreadsheet->getActiveSheet();
+            // Thử lấy từ Redis trước
+            $data_redis = $redis->get($redisKey);
 
-            // Lấy toàn bộ dữ liệu thành mảng
-            $datas = $sheet->toArray();
+            if (!$data_redis) {
+                // Load file
+                $spreadsheet = IOFactory::load($filePath);
 
-            dd($datas);
-            // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
-            $redis->setex($redisKey, 600, $datas);
-          
+                // Lấy sheet đầu tiên
+                $sheet = $spreadsheet->getActiveSheet();
+
+                // Lấy toàn bộ dữ liệu thành mảng
+                $datas = $sheet->toArray();
+
+                // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
+                $redis->setex($redisKey, 6000, $datas);
+            } else {
+                // Nếu có dữ liệu Redis rồi thì decode lại thành mảng
+                $datas = json_decode($data_redis, true);
+
+                dd($datas);
+            }
+
+
+            $inventory = [];
+
+            dd($data_redis);
 
             for ($i = 2; $i < count($datas); $i++) {
                 $itemCode = $datas[$i][0];
