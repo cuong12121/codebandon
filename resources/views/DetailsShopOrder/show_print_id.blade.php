@@ -199,7 +199,7 @@
                 <td> {{ $sku }}</td>
                 <td>{{ $value['count'] }}</td>
                 <td>{{ !empty($sku_quantity[$sku])?$sku_quantity[$sku]:0 }}</td>
-                <td>{{ $result_push }}</td>
+                <td>{{ $result_push }} Tổng:{{ $item_total[$sku] }}</td>
                 <td> {{ $status }} </td>
                 
             </tr>
