@@ -161,7 +161,7 @@
                     }
                 );
 
-                dd($needPrint);
+                dd($datass);
                 // if (!empty($needPrint)) {
                 //     echo "<h3>Danh sách thay thế sản phẩm:</h3>";
                 //     echo "<ul>";
