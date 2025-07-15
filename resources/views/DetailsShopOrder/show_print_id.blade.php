@@ -118,7 +118,35 @@
         <button type="submit">Bắn</button>
     </form>
     <br>
+
+    <form id="confirm" method="post" action="{{ route('push-sku') }}">
+        @csrf
+        
+        <button type="submit">Xác nhận hoàn thành</button>
+    </form>
+    <br>
     <a href="{{ route('show-print') }}"><h3>Danh sách in </h3></a>
+
+    <?php 
+    $needPrint = array_filter(
+        $data,
+        function ($item) use ($data) {
+            $replace = $item['sku_replace'] ?? '';
+            return !empty($replace) && isset($data[$replace]);
+        }
+    );
+    if (!empty($needPrint)) {
+        echo "<h3>Danh sách thay thế sản phẩm:</h3>";
+        echo "<ul>";
+
+        foreach ($data as $sku => $item) {
+            if (!empty($item['sku_replace'])) {
+                echo "<li>SKU: {$item['sku']} thay thế bằng: {$item['sku_replace']} — Số lượng: {$item['quantity']}</li>";
+            }
+        }
+        echo "</ul>";
+    }    
+    ?>
     <h1>Danh sách sản phẩm</h1>
 
     <table>
@@ -152,6 +180,19 @@
                 $sku = $value['sku'].'-'.$value['color'].'-'.$value['size'];
                 $result_push = !empty($datass[$sku]['quantity'])?$datass[$sku]['quantity']:0;
 
+                if($item_total[$sku]==0){
+                    $status ="Hết hàng";
+                }
+                else{
+                    if(intval($result_push)===intval($item_total[$sku])){
+                        $status = 'Đã bắn xong';
+                    }
+                    else{
+                        $status = 'Chưa bắn xong';
+                    }
+                }
+                $status = 
+
             ?>
             <tr>
                 <td>{{ $dem }}</td>
@@ -159,7 +200,7 @@
                 <td>{{ $value['count'] }}</td>
                 <td>{{ !empty($sku_quantity[$sku])?$sku_quantity[$sku]:0 }}</td>
                 <td>{{ $result_push }}</td>
-                <td> {{ intval($result_push)===intval($item_total[$sku])?'Đã bắn xong':'Chưa bắn xong' }} </td>
+                <td> {{ $status }} </td>
                 
             </tr>
             @endforeach
@@ -170,6 +211,12 @@
 document.getElementById('sku_replace').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
         e.preventDefault(); // Chặn không cho form submit
+    }
+});
+
+document.getElementById('confirm').addEventListener('submit', function(e) {
+    if (!confirm('Bạn muốn hoàn thành chứ?')) {
+        e.preventDefault(); // Chặn submit nếu người dùng bấm Cancel
     }
 });
 </script>    
