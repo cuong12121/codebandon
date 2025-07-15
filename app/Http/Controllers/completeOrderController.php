@@ -128,7 +128,7 @@ class completeOrderController extends Controller
             //     $datas = $sheet->toArray();
 
             //     // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
-            //     $redis->setex($redisKey, 6000, $datas);
+            //     $redis->setex($redisKey, 600000, $datas);
             // } else {
 
             //     // Nếu có dữ liệu Redis rồi thì decode lại thành mảng
@@ -152,6 +152,15 @@ class completeOrderController extends Controller
             // }
             // tắt tạm
 
+            $created_time = $_GET['created_time'];
+            $platform_id = $_GET['platform_id'];
+            $warehouse_id = $_GET['warehouse_id'];
+            $house_id = $_GET['house_id'];
+
+            $key_ton = 'stock_data_'.$warehouse_id;
+
+            $datas = json_decode($redis->get($key_ton), true);
+
             
             $inventory = [];
 
@@ -173,10 +182,7 @@ class completeOrderController extends Controller
                     $inventory_total[$itemCode] = $quantity;
                 }
             }
-            $created_time = $_GET['created_time'];
-            $platform_id = $_GET['platform_id'];
-            $warehouse_id = $_GET['warehouse_id'];
-            $house_id = $_GET['house_id'];
+            
 
             
             // Chuyển mảng thành JSON để lưu vào Redis
