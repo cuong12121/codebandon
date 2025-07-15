@@ -166,8 +166,13 @@ $redis = new Redis();
 
 
 $redis->connect('127.0.0.1', 6379);
+$key_redis_push = 'order_packed_'.$id; // hoặc 'order_packed_' . $orderId nếu bạn có ID đơn hàng
+$keyExists = $redis->exists($key_redis_push);
 ?>
+
+
 <body>
+    @if(!$keyExists)
     <form id="skuForm" method="post" action="{{ route('push-sku') }}">
         @csrf
         <div class="form-group">
@@ -189,13 +194,10 @@ $redis->connect('127.0.0.1', 6379);
 
         <button type="submit">Bắn</button>
     </form>
+    @endif
     <br>
 
-    <?php 
-
-        $key_redis_push = 'order_packed_'.$id; // hoặc 'order_packed_' . $orderId nếu bạn có ID đơn hàng
-        $keyExists = $redis->exists($key_redis_push);
-    ?>
+   
     @if($keyExists)
         <button type="submit" style="background-color: green;">Kiểm kê  đã hoàn tất</button>
     
