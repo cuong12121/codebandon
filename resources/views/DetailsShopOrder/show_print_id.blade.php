@@ -96,6 +96,69 @@
       color: green;
     }
     </style>
+
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    /* Nút mở popup */
+    .open-popup {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    /* Overlay mờ */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      width: 400px;
+      max-height: 400px;
+      overflow-y: auto;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Đóng */
+    .close-popup {
+      float: right;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background: #f2f2f2;
+    }
+  </style>
 </head>
 <body>
     <form id="skuForm" method="post" action="{{ route('push-sku') }}">
@@ -126,6 +189,27 @@
     </form>
     <br>
     <a href="{{ route('show-print') }}"><h3>Danh sách in </h3></a>
+
+    <button class="open-popup" onclick="openPopup()">Xem tồn kho</button>
+
+    <!-- Overlay + Popup -->
+    <div class="popup-overlay" id="popupOverlay">
+      <div class="popup">
+        <span class="close-popup" onclick="closePopup()">&times;</span>
+        <h3>Danh sách SKU tồn kho</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>SKU</th>
+              <th>Số lượng tồn</th>
+            </tr>
+          </thead>
+          <tbody id="stockTableBody">
+            <!-- Dữ liệu được thêm bằng JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
 
 
     <h1>Danh sách sản phẩm</h1>
@@ -209,7 +293,32 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
         e.preventDefault(); // Chặn submit nếu người dùng bấm Cancel
     }
 });
-</script>    
+</script>  
+
+<script>
+  const stockData = [
+    { sku: 'N017-BE-04', qty: 12 },
+    { sku: 'N011-WH-00', qty: 8 },
+    { sku: 'N024-BK-04', qty: 0 },
+    { sku: 'N029-BL-03', qty: 5 },
+  ];
+
+  function openPopup() {
+    document.getElementById('popupOverlay').style.display = 'block';
+    const tbody = document.getElementById('stockTableBody');
+    tbody.innerHTML = '';
+    stockData.forEach(item => {
+      const row = `<tr>
+        <td>${item.sku}</td>
+        <td style="color: ${item.qty === 0 ? 'red' : 'black'}">${item.qty}</td>
+      </tr>`;
+      tbody.innerHTML += row;
+    });
+  }
+
+  function closePopup() {
+    document.getElementById('popupOverlay').style.display = 'none';
+  }  
 
 </body>
 </html>

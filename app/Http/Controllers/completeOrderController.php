@@ -114,8 +114,6 @@ class completeOrderController extends Controller
         // Lấy toàn bộ dữ liệu thành mảng
         $datas = $sheet->toArray();
 
-       
-
         $inventory = [];
 
         for ($i = 2; $i < count($datas); $i++) {
