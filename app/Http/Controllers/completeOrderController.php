@@ -155,6 +155,10 @@ class completeOrderController extends Controller
                     $inventory_total[$itemCode] = $quantity;
                 }
             }
+            $created_time = $_GET['created_time'];
+            $platform_id = $_GET['platform_id'];
+            $warehouse_id = $_GET['warehouse_id'];
+            $house_id = $_GET['house_id'];
 
             
             // Chuyển mảng thành JSON để lưu vào Redis
@@ -162,10 +166,7 @@ class completeOrderController extends Controller
             $data_redis = $redis->get('stock_data'.$get_data['warehouse_id']);
     
 
-            $created_time = $_GET['created_time'];
-            $platform_id = $_GET['platform_id'];
-            $warehouse_id = $_GET['warehouse_id'];
-            $house_id = $_GET['house_id'];
+           
             $get_data['platform_id'] = $platform_id;
             $get_data['warehouse_id'] = $warehouse_id;
             $get_data['created_time'] = $created_time;
