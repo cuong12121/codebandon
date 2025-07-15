@@ -255,6 +255,7 @@ class completeOrderController extends Controller
     public function update_ton(Request $request)
     {
         $redis = new \Redis();
+        $redis->connect('127.0.0.1', 6379); 
         $id = $request->id;
         $key = "sku_data_".$id;
         $data_json = $redis->get($key);
