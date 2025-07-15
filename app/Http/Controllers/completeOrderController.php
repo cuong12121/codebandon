@@ -83,6 +83,7 @@ class completeOrderController extends Controller
 
     public function view_history_print($id = null)
     {
+        $redis = new \Redis();
         $domain = "dienmayai.com";
         $context = stream_context_create(array(
             'http' => array(
@@ -159,7 +160,7 @@ class completeOrderController extends Controller
 
             $domain = "dienmayai.com";
             // Kết nối Redis (giả sử dùng phpredis)
-            $redis = new \Redis();
+            
             $redis->connect('127.0.0.1', 6379); // hoặc host, port khác nếu cần
 
             // Tạo cache key (hash md5 để gọn)
