@@ -305,10 +305,7 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
 
 
     const stockData = @json(
-        collect(json_decode($data_redis, true))
-            ->map(fn ($qty, $sku) => ['sku' => $sku, 'qty' => $qty])
-            ->values()
-            ->all()
+        $data_redis
     ) 
   function openPopup() {
     document.getElementById('popupOverlay').style.display = 'block';

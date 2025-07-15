@@ -205,10 +205,13 @@ class completeOrderController extends Controller
                 }
             }
 
-           
+            $data_redisJs =collect(json_decode($data_redis, true))
+            ->map(fn ($qty, $sku) => ['sku' => $sku, 'qty' => $qty])
+            ->values()
+            ->all()
 
             // Nếu có ID thì trả về view chi tiết
-            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$inventory_total, 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redis]);
+            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$inventory_total, 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs]);
         } else {
             // Nếu không có ID thì trả về danh sách
             return view('DetailsShopOrder.show_post_print', compact('data'));
