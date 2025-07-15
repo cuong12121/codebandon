@@ -141,9 +141,9 @@ class completeOrderController extends Controller
         // Chuyển mảng thành JSON để lưu vào Redis
         $redis->setex('stock_data', 64800, json_encode($inventory_total));
 
-        
-
-
+       
+        $data_redis = $redis->get('stock_data');
+    
 
         if ($id) {
             $created_time = $_GET['created_time'];
@@ -207,7 +207,7 @@ class completeOrderController extends Controller
 
 
             // Nếu có ID thì trả về view chi tiết
-            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$inventory_total, 'itemSummary'=>$skuSummary]);
+            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$inventory_total, 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redis]);
         } else {
             // Nếu không có ID thì trả về danh sách
             return view('DetailsShopOrder.show_post_print', compact('data'));
