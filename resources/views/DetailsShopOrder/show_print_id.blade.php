@@ -296,13 +296,13 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
 </script>  
 
 <script>
-  const stockData = [
-    { sku: 'N017-BE-04', qty: 12 },
-    { sku: 'N011-WH-00', qty: 8 },
-    { sku: 'N024-BK-04', qty: 0 },
-    { sku: 'N029-BL-03', qty: 5 },
-  ];
 
+    const stockData = @json(
+        collect(json_decode(Redis::get('stock_data'), true))
+            ->map(fn($qty, $sku) => ['sku' => $sku, 'qty' => $qty])
+            ->values()
+    );
+  
   function openPopup() {
     document.getElementById('popupOverlay').style.display = 'block';
     const tbody = document.getElementById('stockTableBody');

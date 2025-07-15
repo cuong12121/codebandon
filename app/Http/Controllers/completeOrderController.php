@@ -135,6 +135,11 @@ class completeOrderController extends Controller
             }
         }
 
+        $redis->connect('127.0.0.1', 6379);
+
+        // Chuyển mảng thành JSON để lưu vào Redis
+        $redis->setex('stock_data', 64800, json_encode($inventory_total));
+
         
 
 
