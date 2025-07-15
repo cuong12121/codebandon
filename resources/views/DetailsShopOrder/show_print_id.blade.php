@@ -156,11 +156,14 @@
                 
 
                 foreach ($datass as $sku => $item) {
-                    // Kiểm tra nếu có sku_replace và sku_replace tồn tại trong keys
-                    if (!empty($item['sku_replace']) && isset($data[trim($item['sku_replace'])])) {
-                        echo "SKU {$sku} đang thay thế cho SKU {$item['sku_replace']}<br>";
-                    }
+                    echo $item['sku_replace'];
+                    // // Kiểm tra nếu có sku_replace và sku_replace tồn tại trong keys
+                    // if (!empty($item['sku_replace']) && isset($data[trim($item['sku_replace'])])) {
+                    //     echo "SKU {$sku} đang thay thế cho SKU {$item['sku_replace']}<br>";
+                    // }
                 }
+
+                die;
 
               
 
