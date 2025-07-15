@@ -157,7 +157,7 @@
                     
                     // // Kiểm tra nếu có sku_replace và sku_replace tồn tại trong keys
                     if (!empty($item['sku_replace']) ) {
-                        echo "<span style='color: red;''>SKU {$item['sku_replace']} đang thay thế cho SKU {$item['sku']}</span><br>";
+                        echo "<span style='color: red;''>SKU {$item['sku_replace']} đang thay thế cho SKU {$item['sku']} với số lượng {$item['quantity']}</span><br>";
                     }
                 }
 
