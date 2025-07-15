@@ -294,11 +294,14 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
     }
 });
 </script>  
-
+<?php 
+    dd(Redis::get('stock_data'));
+    ?>
 
 <script>
-    const stockData = @json(
-        collect(json_decode(Redis::get('stock_data'), true))
+
+
+    const stockData = @json(collect(json_decode(Redis::get('stock_data'), true))
             ->map(fn($qty, $sku) => ['sku' => $sku, 'qty' => $qty])
             ->values()
             ->all()
