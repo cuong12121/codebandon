@@ -189,6 +189,9 @@ class completeOrderController extends Controller
                 $redis->setex($cache_key, 1200, $api_result);
             }
 
+            dd($response);
+            
+
             
 
             // Nếu có ID thì trả về view chi tiết
