@@ -128,6 +128,8 @@
     <a href="{{ route('show-print') }}"><h3>Danh sách in </h3></a>
 
     <?php 
+
+    dd($data);
     $needPrint = array_filter(
         $data,
         function ($item) use ($data) {
