@@ -153,28 +153,16 @@
                 $datass = $data_json ? json_decode($data_json, true) : [];
 
 
-                $needPrint = array_filter(
-                    $datass,
-                    function ($item) use ($datass) {
-                        $replace = $item['sku_replace'] ?? '';
-                        return !empty($replace) && isset($datass[$replace]);
+                
+
+                foreach ($datass as $sku => $item) {
+                    // Kiểm tra nếu có sku_replace và sku_replace tồn tại trong keys
+                    if (!empty($item['sku_replace']) && isset($data[trim($item['sku_replace'])])) {
+                        echo "SKU {$sku} đang thay thế cho SKU {$item['sku_replace']}<br>";
                     }
-                );
+                }
 
-                dd($datass);
-
-                dd($needPrint);
-                // if (!empty($needPrint)) {
-                //     echo "<h3>Danh sách thay thế sản phẩm:</h3>";
-                //     echo "<ul>";
-
-                //     foreach ($datass as $sku => $item) {
-                //         if (!empty($item['sku_replace'])) {
-                //             echo "<li>SKU: {$item['sku']} thay thế bằng: {$item['sku_replace']} — Số lượng: {$item['quantity']}</li>";
-                //         }
-                //     }
-                //     echo "</ul>";
-                // }    
+              
 
            ?> 
             @foreach($data as $value)
