@@ -160,8 +160,13 @@
     }
   </style>
 </head>
+<?php
+
+$redis = new Redis();
 
 
+$redis->connect('127.0.0.1', 6379);
+?>
 <body>
     <form id="skuForm" method="post" action="{{ route('push-sku') }}">
         @csrf
@@ -186,6 +191,15 @@
     </form>
     <br>
 
+    <?php 
+
+        $key_redis_push = 'order_packed_'.$id; // hoặc 'order_packed_' . $orderId nếu bạn có ID đơn hàng
+        $keyExists = $redis->exists($key_redis_push);
+    ?>
+    @if($keyExists)
+        <button type="submit" style="background-color: green;">Kiểm kê  đã hoàn tất</button>
+    
+    @else
     <form id="confirm" method="post" action="{{ route('update-ton-in') }}">
         @csrf
         <input type="hidden" name="id" value="{{ $id }}">
@@ -193,6 +207,8 @@
         <input type="hidden" name="warehouse_id" value="{{ $warehouse_id }}">
         <button type="submit" style="background-color: red;">Xác nhận hoàn thành</button>
     </form>
+
+    @endif
     <br>
     <a href="{{ route('show-print') }}"><h3>Danh sách in </h3></a>
 
@@ -241,11 +257,10 @@
             <?php 
                 $data_full = [];
                 $dem=0;
-                $redis = new Redis();
-                $redis->connect('127.0.0.1', 6379);
+                
                 $data_json = $redis->get('sku_data_'.$id);
                 $datass = $data_json ? json_decode($data_json, true) : [];
-
+               
 
                 foreach ($datass as $sku => $item) {
                     
