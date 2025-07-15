@@ -133,10 +133,10 @@ class completeOrderController extends Controller
                 // Nếu có dữ liệu Redis rồi thì decode lại thành mảng
                 $datas = json_decode($data_redis, true);
 
-                dd($datas);
+                
             }
 
-
+            dd($datas);
             $inventory = [];
 
             dd($data_redis);
