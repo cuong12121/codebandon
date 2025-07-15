@@ -130,10 +130,25 @@ class completeOrderController extends Controller
                 // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
                 $redis->setex($redisKey, 6000, $datas);
             } else {
+
                 // Nếu có dữ liệu Redis rồi thì decode lại thành mảng
                 $datas = json_decode($data_redis, true);
 
-                
+                if(empty($datas)){
+                    // Load file
+                    $spreadsheet = IOFactory::load($filePath);
+
+                    // Lấy sheet đầu tiên
+                    $sheet = $spreadsheet->getActiveSheet();
+
+                    // Lấy toàn bộ dữ liệu thành mảng
+                    $datas = $sheet->toArray();
+
+                    // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
+                    $redis->setex($redisKey, 6000, $datas);
+                }
+
+
             }
 
             dd($datas);
