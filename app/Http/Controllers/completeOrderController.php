@@ -297,7 +297,33 @@ class completeOrderController extends Controller
         $data_json = $redis->get($key);
         $data = $data_json ? json_decode($data_json, true) : [];
         $data_ton = json_decode($redis->get($key_ton),true);
-        dd($data);
+
+        // thực hiện trừ tồn
+        foreach ($itemsToSubtract as $item) {
+            $sku = $data['sku'];
+            $replace = $data['sku_replace'];
+            $qty = $data['quantity'];
+
+            // Ưu tiên trừ bằng sku_replace nếu có
+            if ($replace && isset($data_ton[$replace])) {
+                $data_ton[$replace] -= $qty;
+                if ($data_ton[$replace] < 0) $data_ton[$replace] = 0;
+            }
+            // Nếu không có sku_replace, kiểm tra sku chính
+            elseif (isset($data_ton[$sku])) {
+                $data_ton[$sku] -= $qty;
+                if ($data_ton[$sku] < 0) $data_ton[$sku] = 0;
+            }
+        }
+        Redis::setex($key_ton, 60000, json_encode($stock));
+
+        Redis::set("order_packed_{$id}", 'packed');
+
+        return redirect()->back()->with('success', "Đã duyệt hàng cho đơn #{$id}");
+       
+
+  
+
         // dd($data);
 
 

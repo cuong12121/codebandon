@@ -160,6 +160,8 @@
     }
   </style>
 </head>
+
+
 <body>
     <form id="skuForm" method="post" action="{{ route('push-sku') }}">
         @csrf
@@ -214,7 +216,11 @@
         </table>
       </div>
     </div>
-
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <h1>Danh sách sản phẩm</h1>
 
