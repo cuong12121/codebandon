@@ -127,28 +127,7 @@
     <br>
     <a href="{{ route('show-print') }}"><h3>Danh sách in </h3></a>
 
-    <?php 
 
-    dd($data);
-    $needPrint = array_filter(
-        $data,
-        function ($item) use ($data) {
-            $replace = $item['sku_replace'] ?? '';
-            return !empty($replace) && isset($data[$replace]);
-        }
-    );
-    if (!empty($needPrint)) {
-        echo "<h3>Danh sách thay thế sản phẩm:</h3>";
-        echo "<ul>";
-
-        foreach ($data as $sku => $item) {
-            if (!empty($item['sku_replace'])) {
-                echo "<li>SKU: {$item['sku']} thay thế bằng: {$item['sku_replace']} — Số lượng: {$item['quantity']}</li>";
-            }
-        }
-        echo "</ul>";
-    }    
-    ?>
     <h1>Danh sách sản phẩm</h1>
 
     <table>
@@ -174,7 +153,25 @@
                 $datass = $data_json ? json_decode($data_json, true) : [];
 
 
-               
+                $needPrint = array_filter(
+                    $datass,
+                    function ($item) use ($datass) {
+                        $replace = $item['sku_replace'] ?? '';
+                        return !empty($replace) && isset($datass[$replace]);
+                    }
+                );
+                if (!empty($needPrint)) {
+                    echo "<h3>Danh sách thay thế sản phẩm:</h3>";
+                    echo "<ul>";
+
+                    foreach ($datass as $sku => $item) {
+                        if (!empty($item['sku_replace'])) {
+                            echo "<li>SKU: {$item['sku']} thay thế bằng: {$item['sku_replace']} — Số lượng: {$item['quantity']}</li>";
+                        }
+                    }
+                    echo "</ul>";
+                }    
+
            ?> 
             @foreach($data as $value)
             <?php 
