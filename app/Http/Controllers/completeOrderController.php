@@ -205,7 +205,7 @@ class completeOrderController extends Controller
                 }
             }
 
-            dd(json_decode($data_redis));
+            dd(json_decode($data_redis,true));
 
             die;
 
