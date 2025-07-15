@@ -190,7 +190,7 @@
                 <td>{{ $value['count'] }}</td>
                 <td>{{ !empty($sku_quantity[$sku])?$sku_quantity[$sku]:0 }}</td>
                 <td>{{ $result_push }} Tổng in:{{ $itemSummary[$sku] }}</td>
-                <td> {{ $status }} </td>
+                <td> {!! $status !!} </td>
                 
             </tr>
             @endforeach
