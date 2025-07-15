@@ -150,6 +150,7 @@ class completeOrderController extends Controller
 
 
             // }
+            // tắt tạm
 
             
             $inventory = [];
@@ -316,7 +317,7 @@ class completeOrderController extends Controller
             }
         }
 
-       
+
         $redis->setex($key_ton, 60000, json_encode($data_ton));
 
         $redis->set("order_packed_{$id}", 'packed');
