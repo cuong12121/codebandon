@@ -296,6 +296,7 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
 </script>  
 <?php 
     dd(Redis::get('stock_data'));
+    die;
     ?>
 
 <script>
