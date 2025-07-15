@@ -219,6 +219,43 @@ class completeOrderController extends Controller
        
         
     }
+    public function push_sku(Request $request)
+    {
+        $redis = new \Redis();
+        $redis->connect('127.0.0.1', 6379); // hoặc dùng unix socket
+
+        $sku = trim($_POST['sku']);
+        $quantity = (int)$_POST['quantity'];
+        $sku_replace = trim($_POST['sku_replace']);
+        $id = $_POST['id'];
+
+        $key = "sku_data_".$id; // Bạn có thể thêm session_id vào nếu cần tách riêng user
+
+        // Lấy dữ liệu cũ
+        $data_json = $redis->get($key);
+        $data = $data_json ? json_decode($data_json, true) : [];
+
+        // Cộng dồn
+        if (isset($data[$sku])) {
+            $data[$sku]['quantity'] += $quantity;
+            $data[$sku]['sku_replace'] = $sku_replace;
+        } else {
+            $data[$sku] = [
+                'sku' => $sku,
+                'quantity' => $quantity,
+                'sku_replace' => $sku_replace,
+            ];
+        }
+
+        // Lưu lại
+        $redis->set($key, json_encode($data));
+        return redirect()->back();
+    }
+
+    public function update_ton()
+    {
+        // code...
+    }
 
     protected function get_data_order_new()
     {
@@ -558,37 +595,7 @@ class completeOrderController extends Controller
         
     }
 
-    public function push_sku(Request $request)
-    {
-        $redis = new \Redis();
-        $redis->connect('127.0.0.1', 6379); // hoặc dùng unix socket
-
-        $sku = trim($_POST['sku']);
-        $quantity = (int)$_POST['quantity'];
-        $sku_replace = trim($_POST['sku_replace']);
-
-        $key = "sku_data"; // Bạn có thể thêm session_id vào nếu cần tách riêng user
-
-        // Lấy dữ liệu cũ
-        $data_json = $redis->get($key);
-        $data = $data_json ? json_decode($data_json, true) : [];
-
-        // Cộng dồn
-        if (isset($data[$sku])) {
-            $data[$sku]['quantity'] += $quantity;
-            $data[$sku]['sku_replace'] = $sku_replace;
-        } else {
-            $data[$sku] = [
-                'sku' => $sku,
-                'quantity' => $quantity,
-                'sku_replace' => $sku_replace,
-            ];
-        }
-
-        // Lưu lại
-        $redis->set($key, json_encode($data));
-        return redirect()->back();
-    }
+    
 
     public function get_data_to_pm()
     {

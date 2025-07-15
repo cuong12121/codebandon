@@ -178,6 +178,8 @@
           <input type="text" id="sku_replace" name="sku_replace" value="" min="">
         </div>
 
+        <input type="hidden" name="id" value="{{ $id }}">
+
         <button type="submit">Bắn</button>
     </form>
     <br>
