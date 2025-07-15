@@ -157,7 +157,7 @@
                     
                     // // Kiểm tra nếu có sku_replace và sku_replace tồn tại trong keys
                     if (!empty($item['sku_replace']) ) {
-                        echo "SKU {$item['sku_replace']} đang thay thế cho SKU {$item['sku']}<br>";
+                        echo "<span style='color: red;''>SKU {$item['sku_replace']} đang thay thế cho SKU {$item['sku']}</span><br>";
                     }
                 }
 
@@ -171,7 +171,7 @@
                 $result_push = !empty($datass[$sku]['quantity'])?$datass[$sku]['quantity']:0;
 
                 if($item_total[$sku]==0){
-                    $status ="Hết hàng";
+                     $status = '<span style="color: red;">Hết hàng</span>';
                 }
                 else{
                     if(intval($result_push)===intval($itemSummary[$sku])){
