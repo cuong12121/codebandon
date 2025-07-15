@@ -205,7 +205,7 @@ document.getElementById('sku_replace').addEventListener('keydown', function(e) {
 });
 
 document.getElementById('confirm').addEventListener('submit', function(e) {
-    if (!confirm('Bạn muốn hoàn thành chứ?')) {
+    if (!confirm('Bạn muốn hoàn thành chứ, sẽ trừ tồn ngay các sản phẩm đã bắn xong ?')) {
         e.preventDefault(); // Chặn submit nếu người dùng bấm Cancel
     }
 });
