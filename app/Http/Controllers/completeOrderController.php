@@ -186,13 +186,8 @@ class completeOrderController extends Controller
             // }
             
 
-            
-            // Chuyển mảng thành JSON để lưu vào Redis
-            $redis->setex('stock_data_'.$warehouse_id, 64800, json_encode($inventory_total));
             $data_redis = $redis->get('stock_data_'.$warehouse_id);
     
-
-           
             $get_data['platform_id'] = $platform_id;
             $get_data['warehouse_id'] = $warehouse_id;
             $get_data['created_time'] = $created_time;
