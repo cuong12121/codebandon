@@ -305,7 +305,7 @@ document.getElementById('skuForm').addEventListener('submit', function(e) {
     const sku = skuInput.value.trim();
 
     if (disabledSkus.includes(sku)) {
-        alert(`SKU "${sku}" đã bắn đủ số lượng, không thể bắn thêm vui lòng kiểm tra lại.`);
+        alert(`SKU "${sku}" đã bắn đủ số lượng, không thể bắn thêm, vui lòng kiểm tra lại.`);
         e.preventDefault(); // Chặn form submit
     }
 });
