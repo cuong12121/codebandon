@@ -191,7 +191,7 @@
                         $status = 'Chưa bắn xong';
                     }
                 }
-                $status = 
+                
 
             ?>
             <tr>
