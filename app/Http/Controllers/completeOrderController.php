@@ -297,7 +297,7 @@ class completeOrderController extends Controller
         $data_json = $redis->get($key);
         $data = $data_json ? json_decode($data_json, true) : [];
         $data_ton = json_decode($redis->get($key_ton),true);
-        dd($data_ton);
+        dd($data);
         // dd($data);
 
 
