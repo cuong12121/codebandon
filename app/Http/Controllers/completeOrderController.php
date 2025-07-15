@@ -84,6 +84,7 @@ class completeOrderController extends Controller
     public function view_history_print($id = null)
     {
         $redis = new \Redis();
+        $redis->connect('127.0.0.1', 6379);
         $domain = "dienmayai.com";
         $context = stream_context_create(array(
             'http' => array(
@@ -110,14 +111,29 @@ class completeOrderController extends Controller
 
         if ($id) {
 
-            // Load file
-            $spreadsheet = IOFactory::load($filePath);
+            // Key Redis bạn muốn dùng
+            $redisKey = 'excel_data_stock';
 
-            // Lấy sheet đầu tiên
-            $sheet = $spreadsheet->getActiveSheet();
+            // Thử lấy từ Redis trước
+            $data_redis = $redis->get($redisKey);
 
-            // Lấy toàn bộ dữ liệu thành mảng
-            $datas = $sheet->toArray();
+            if (!$data_redis) {
+                // Load file
+                $spreadsheet = IOFactory::load($filePath);
+
+                // Lấy sheet đầu tiên
+                $sheet = $spreadsheet->getActiveSheet();
+
+                // Lấy toàn bộ dữ liệu thành mảng
+                $datas = $sheet->toArray();
+
+                // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
+                $redis->setex($redisKey, 600, $json_data);
+            } else {
+                // Nếu có dữ liệu Redis rồi thì decode lại thành mảng
+                $datas = json_decode($data_redis, true);
+            }
+
 
             $inventory = [];
 
@@ -140,10 +156,9 @@ class completeOrderController extends Controller
                 }
             }
 
-            $redis->connect('127.0.0.1', 6379);
-
+            
             // Chuyển mảng thành JSON để lưu vào Redis
-            $redis->setex('stock_data_'.$get_data['warehouse_id'], 64800, json_encode($inventory_total));
+            $redis->setex('stock_data_'.$warehouse_id, 64800, json_encode($inventory_total));
             $data_redis = $redis->get('stock_data'.$get_data['warehouse_id']);
     
 
