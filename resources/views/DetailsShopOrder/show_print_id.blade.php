@@ -239,7 +239,7 @@
         <tbody>
             @if(!empty($data) && count($data)>0)
             <?php 
-
+                $data_full = [];
                 $dem=0;
                 $redis = new Redis();
                 $redis->connect('127.0.0.1', 6379);
@@ -269,6 +269,9 @@
                 }
                 else{
                     if(intval($result_push)===intval($itemSummary[$sku])){
+                        array_push($data_full, $sku);
+                        // lấy sku nào đã bắn xong để không cho bắn nữa
+
                         $status = 'Đã bắn xong';
                     }
                     else{
@@ -294,6 +297,19 @@
 
 <script>
 
+
+const disabledSkus = <?php echo json_encode($data_full); ?>;
+
+document.getElementById('skuForm').addEventListener('submit', function(e) {
+    const skuInput = document.getElementById('sku');
+    const sku = skuInput.value.trim();
+
+    if (disabledSkus.includes(sku)) {
+        alert(`SKU "${sku}" đã bắn đủ số lượng, không thể bắn thêm vui lòng kiểm tra lại.`);
+        e.preventDefault(); // Chặn form submit
+    }
+});
+
 document.getElementById('sku_replace').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
         e.preventDefault(); // Chặn không cho form submit
@@ -314,6 +330,8 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
     const stockData = @json(
         $data_redis
     ) 
+
+
   function openPopup() {
     document.getElementById('popupOverlay').style.display = 'block';
     const tbody = document.getElementById('stockTableBody');
