@@ -161,29 +161,29 @@ class completeOrderController extends Controller
 
             $datas = json_decode($redis->get($key_ton), true);
 
-            dd($datas);
+            // dd($datas);
 
             
-            $inventory = [];
+            // $inventory = [];
 
-            for ($i = 2; $i < count($datas); $i++) {
-                $itemCode = $datas[$i][0];
-                $quantity = $datas[$i][1];
-                $inventory[$itemCode] = $quantity;
-            }
+            // for ($i = 2; $i < count($datas); $i++) {
+            //     $itemCode = $datas[$i][0];
+            //     $quantity = $datas[$i][1];
+            //     $inventory[$itemCode] = $quantity;
+            // }
 
-            $inventory_total = [];
+            // $inventory_total = [];
 
-            for ($i = 1; $i < count($datas); $i++) {
-                $itemCode = $datas[$i][0];
-                $quantity = (int) $datas[$i][1];
+            // for ($i = 1; $i < count($datas); $i++) {
+            //     $itemCode = $datas[$i][0];
+            //     $quantity = (int) $datas[$i][1];
 
-                if (isset($inventory_total[$itemCode])) {
-                    $inventory_total[$itemCode] += $quantity;
-                } else {
-                    $inventory_total[$itemCode] = $quantity;
-                }
-            }
+            //     if (isset($inventory_total[$itemCode])) {
+            //         $inventory_total[$itemCode] += $quantity;
+            //     } else {
+            //         $inventory_total[$itemCode] = $quantity;
+            //     }
+            // }
             
 
             
@@ -254,7 +254,7 @@ class completeOrderController extends Controller
             ->all();
 
             // Nếu có ID thì trả về view chi tiết
-            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$inventory_total, 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key,'warehouse_id'=>$get_data['warehouse_id']]);
+            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$datas, 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key,'warehouse_id'=>$get_data['warehouse_id']]);
         } else {
             // Nếu không có ID thì trả về danh sách
             return view('DetailsShopOrder.show_post_print', compact('data'));
