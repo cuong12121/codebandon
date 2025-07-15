@@ -184,9 +184,9 @@
     </form>
     <br>
 
-    <form id="confirm" method="post" action="{{ route('push-sku') }}">
+    <form id="confirm" method="post" action="{{ route('update-ton-in') }}">
         @csrf
-        
+        <input type="hidden" name="id" value="{{ $id }}">
         <button type="submit" style="background-color: red;">Xác nhận hoàn thành</button>
     </form>
     <br>

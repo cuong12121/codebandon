@@ -15,6 +15,8 @@ Route::get('/','loginController@viewLogin')->name('home');
 
 
 
+
+
 Route::get('complete-order', 'completeOrderController@viewOrder')->middleware('login')->name('dong don');
 
 Route::get('show-complete-order', 'completeOrderController@viewShowOrder')->middleware('login')->name('tracking');
@@ -66,6 +68,7 @@ Route::get('get-data-order-new-to-api', 'completeOrderController@get_data_order_
 
 Route::group(['prefix' => 'admins'], function() {
 
+    Route::post('update-ton-in', 'completeOrderController@update_ton')->name('update-ton-in');
     Route::post('get-data-to-sheet', 'sheetApiController@runPriceToDrive')->name('get_data_to_sheet');
 
     Route::post('kho', 'khoController@index')->name('kho.admin');
