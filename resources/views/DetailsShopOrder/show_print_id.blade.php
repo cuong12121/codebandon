@@ -122,7 +122,7 @@
     <form id="confirm" method="post" action="{{ route('push-sku') }}">
         @csrf
         
-        <button type="submit">Xác nhận hoàn thành</button>
+        <button type="submit" style="background-color: red;">Xác nhận hoàn thành</button>
     </form>
     <br>
     <a href="{{ route('show-print') }}"><h3>Danh sách in </h3></a>
