@@ -319,6 +319,6 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
   function closePopup() {
     document.getElementById('popupOverlay').style.display = 'none';
   }  
-
+</script>
 </body>
 </html>
