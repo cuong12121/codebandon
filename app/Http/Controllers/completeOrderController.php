@@ -315,7 +315,7 @@ class completeOrderController extends Controller
                 if ($data_ton[$sku] < 0) $data_ton[$sku] = 0;
             }
         }
-        $redis->setex($key_ton, 60000, json_encode($redis->($data_ton)));
+        $redis->setex($key_ton, 60000, json_encode($data_ton));
 
         $redis->set("order_packed_{$id}", 'packed');
 
