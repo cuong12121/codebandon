@@ -170,7 +170,7 @@
                 $sku = $value['sku'].'-'.$value['color'].'-'.$value['size'];
                 $result_push = !empty($datass[$sku]['quantity'])?$datass[$sku]['quantity']:0;
 
-                if($item_total[$sku]==0){
+                if(empty($item_total[$sku]) || $item_total[$sku]==0){
                      $status = '<span style="color: red;">Hết hàng</span>';
                 }
                 else{
