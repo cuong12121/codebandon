@@ -184,7 +184,7 @@
                     $status ="Hết hàng";
                 }
                 else{
-                    if(intval($result_push)===intval($item_total[$sku])){
+                    if(intval($result_push)===intval($itemSummary[$sku])){
                         $status = 'Đã bắn xong';
                     }
                     else{
@@ -192,14 +192,14 @@
                     }
                 }
                 
-
+            $data_push    
             ?>
             <tr>
                 <td>{{ $dem }}</td>
                 <td> {{ $sku }}</td>
                 <td>{{ $value['count'] }}</td>
                 <td>{{ !empty($sku_quantity[$sku])?$sku_quantity[$sku]:0 }}</td>
-                <td>{{ $result_push }} Tổng:{{ $item_total[$sku] }}</td>
+                <td>{{ $result_push }} Tổng:{{ $itemSummary[$sku] }}</td>
                 <td> {{ $status }} </td>
                 
             </tr>

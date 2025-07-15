@@ -188,14 +188,22 @@ class completeOrderController extends Controller
                 // Lưu vào Redis 10 phút (600 giây)
                 $redis->setex($cache_key, 1200, $api_result);
             }
+            $skuSummary = [];
 
-            dd($response);
-            
+            foreach ($response as $row) {
+                $skuKey = $row['sku'] . '-' . $row['color'] . '-' . $row['size'];
+                $count = (int) $row['count'];
 
-            
+                if (isset($skuSummary[$skuKey])) {
+                    $skuSummary[$skuKey] += $count;
+                } else {
+                    $skuSummary[$skuKey] = $count;
+                }
+            }
+
 
             // Nếu có ID thì trả về view chi tiết
-            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$inventory_total]);
+            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$inventory, 'item_total'=>$inventory_total, 'itemSummary'=>$skuSummary]);
         } else {
             // Nếu không có ID thì trả về danh sách
             return view('DetailsShopOrder.show_post_print', compact('data'));
