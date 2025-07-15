@@ -153,19 +153,15 @@
                 $datass = $data_json ? json_decode($data_json, true) : [];
 
 
-                
-
                 foreach ($datass as $sku => $item) {
-                    echo $item['sku_replace'];
+                    
                     // // Kiểm tra nếu có sku_replace và sku_replace tồn tại trong keys
-                    // if (!empty($item['sku_replace']) && isset($data[trim($item['sku_replace'])])) {
-                    //     echo "SKU {$sku} đang thay thế cho SKU {$item['sku_replace']}<br>";
-                    // }
+                    if (!empty($item['sku_replace']) ) {
+                        echo "SKU {$item['sku_replace']} đang thay thế cho SKU {$item['sku']}<br>";
+                    }
                 }
 
-                die;
-
-              
+               
 
            ?> 
             @foreach($data as $value)
