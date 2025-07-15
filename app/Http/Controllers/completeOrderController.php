@@ -299,10 +299,10 @@ class completeOrderController extends Controller
         $data_ton = json_decode($redis->get($key_ton),true);
 
         // thực hiện trừ tồn
-        foreach ($itemsToSubtract as $item) {
-            $sku = $data['sku'];
-            $replace = $data['sku_replace'];
-            $qty = $data['quantity'];
+        foreach ($data as $item) {
+            $sku = $item['sku'];
+            $replace = $item['sku_replace'];
+            $qty = $item['quantity'];
 
             // Ưu tiên trừ bằng sku_replace nếu có
             if ($replace && isset($data_ton[$replace])) {
