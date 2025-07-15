@@ -137,6 +137,8 @@ class completeOrderController extends Controller
 
             $inventory = [];
 
+            dd($datas);
+
             for ($i = 2; $i < count($datas); $i++) {
                 $itemCode = $datas[$i][0];
                 $quantity = $datas[$i][1];
