@@ -304,11 +304,7 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
 <script>
 
 
-    const stockData = @json(collect(json_decode(Redis::get('stock_data'), true))
-            ->map(fn($qty, $sku) => ['sku' => $sku, 'qty' => $qty])
-            ->values()
-            ->all()
-    );
+    
   function openPopup() {
     document.getElementById('popupOverlay').style.display = 'block';
     const tbody = document.getElementById('stockTableBody');
