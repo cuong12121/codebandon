@@ -315,9 +315,9 @@ class completeOrderController extends Controller
                 if ($data_ton[$sku] < 0) $data_ton[$sku] = 0;
             }
         }
-        Redis::setex($key_ton, 60000, json_encode($stock));
+        $redis->setex($key_ton, 60000, json_encode($stock));
 
-        Redis::set("order_packed_{$id}", 'packed');
+        $redis->set("order_packed_{$id}", 'packed');
 
         return redirect()->back()->with('success', "Đã duyệt hàng cho đơn #{$id}");
        
