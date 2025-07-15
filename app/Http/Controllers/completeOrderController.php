@@ -151,10 +151,8 @@ class completeOrderController extends Controller
 
             }
 
-            dd($datas);
+            
             $inventory = [];
-
-            // dd($data_redis);
 
             for ($i = 2; $i < count($datas); $i++) {
                 $itemCode = $datas[$i][0];
