@@ -160,17 +160,19 @@
                         return !empty($replace) && isset($datass[$replace]);
                     }
                 );
-                if (!empty($needPrint)) {
-                    echo "<h3>Danh sách thay thế sản phẩm:</h3>";
-                    echo "<ul>";
 
-                    foreach ($datass as $sku => $item) {
-                        if (!empty($item['sku_replace'])) {
-                            echo "<li>SKU: {$item['sku']} thay thế bằng: {$item['sku_replace']} — Số lượng: {$item['quantity']}</li>";
-                        }
-                    }
-                    echo "</ul>";
-                }    
+                dd($needPrint);
+                // if (!empty($needPrint)) {
+                //     echo "<h3>Danh sách thay thế sản phẩm:</h3>";
+                //     echo "<ul>";
+
+                //     foreach ($datass as $sku => $item) {
+                //         if (!empty($item['sku_replace'])) {
+                //             echo "<li>SKU: {$item['sku']} thay thế bằng: {$item['sku_replace']} — Số lượng: {$item['quantity']}</li>";
+                //         }
+                //     }
+                //     echo "</ul>";
+                // }    
 
            ?> 
             @foreach($data as $value)
