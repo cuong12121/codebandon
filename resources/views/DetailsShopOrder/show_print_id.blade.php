@@ -271,6 +271,7 @@ $keyExists = $redis->exists($key_redis_push);
                         echo "<span style='color: red;''>SKU {$item['sku_replace']} đang thay thế cho SKU {$item['sku']} với số lượng {$item['quantity']}</span><br>";
                     }
                 }
+                $full_sku = [];
 
                
 
@@ -279,6 +280,8 @@ $keyExists = $redis->exists($key_redis_push);
             <?php 
                 $dem++;
                 $sku = $value['sku'].'-'.$value['color'].'-'.$value['size'];
+
+                array_push($full_sku, $sku);
                 $result_push = !empty($datass[$sku]['quantity'])?$datass[$sku]['quantity']:0;
 
                 if(empty($item_total[$sku]) || $item_total[$sku]==0){
@@ -321,10 +324,17 @@ document.getElementById('skuForm').addEventListener('submit', function(e) {
     const skuInput = document.getElementById('sku');
     const sku = skuInput.value.trim();
 
+    const fullSku = <?php echo json_encode($full_sku); ?>;
+
+    if (!fullSku.includes(sku)) {
+        alert(`SKU "${sku}" không tồn tại trong file in này.`);
+        e.preventDefault();
+    }    
     if (disabledSkus.includes(sku)) {
         alert(`SKU "${sku}" đã bắn đủ số lượng, không thể bắn thêm, vui lòng kiểm tra lại.`);
         e.preventDefault(); // Chặn form submit
     }
+    alert(`SKU "${sku}" Đã bắn thành công!`);
 });
 
 document.getElementById('sku_replace').addEventListener('keydown', function(e) {
