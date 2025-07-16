@@ -152,11 +152,29 @@ class completeOrderController extends Controller
             $get_data['house_id'] = $house_id;
             $data_json = json_encode($get_data);
 
+            $domain = "dienmayai.com";
+
             // dd($data_json);
 
             $data_json = urlencode($data_json);
 
-            $domain = "dienmayai.com";
+            $context = stream_context_create(array(
+                'http' => array(
+                    'method' => 'GET',
+                    'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
+                                "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
+                )
+            ));
+
+            $link_api = 'https://api.' . $domain . '/api/data-order-print?data=' . $data_json;
+            $api_result = file_get_contents($link_api, false, $context);
+
+           
+            // Giải mã JSON
+            $response = json_decode($api_result, true);
+
+            dd($response);
+
             // Kết nối Redis (giả sử dùng phpredis)
             
             $redis->connect('127.0.0.1', 6379); // hoặc host, port khác nếu cần
