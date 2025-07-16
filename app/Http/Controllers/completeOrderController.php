@@ -152,6 +152,8 @@ class completeOrderController extends Controller
             $get_data['house_id'] = $house_id;
             $data_json = json_encode($get_data);
 
+            dd($data_json);
+
             $data_json = urlencode($data_json);
 
             $domain = "dienmayai.com";
@@ -191,7 +193,7 @@ class completeOrderController extends Controller
                 $redis->setex($cache_key, 1200, $api_result);
             }
             $skuSummary = [];
-            dd($response);
+
 
             foreach ($response as $row) {
                 $skuKey = $row['sku'] . '-' . $row['color'] . '-' . $row['size'];
