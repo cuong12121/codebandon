@@ -118,41 +118,50 @@ class completeOrderController extends Controller
             // Thử lấy từ Redis trước
             $data_redis = $redis->get($redisKey);
 
-            if (!$data_redis) {
-                // Load file
-                $spreadsheet = IOFactory::load($filePath);
+            // if (!$data_redis) {
+            //     // Load file
+            //     $spreadsheet = IOFactory::load($filePath);
 
-                // Lấy sheet đầu tiên
-                $sheet = $spreadsheet->getActiveSheet();
+            //     // Lấy sheet đầu tiên
+            //     $sheet = $spreadsheet->getActiveSheet();
 
-                // Lấy toàn bộ dữ liệu thành mảng
-                $datas = $sheet->toArray();
+            //     // Lấy toàn bộ dữ liệu thành mảng
+            //     $datas = $sheet->toArray();
 
-                // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
-                $redis->setex($redisKey, 600000, $datas);
-            } else {
+            //     // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
+            //     $redis->setex($redisKey, 600000, $datas);
+            // } else {
 
-                // Nếu có dữ liệu Redis rồi thì decode lại thành mảng
-                $datas = json_decode($data_redis, true);
+            //     // Nếu có dữ liệu Redis rồi thì decode lại thành mảng
+            //     $datas = json_decode($data_redis, true);
 
-                if(empty($datas)){
-                    // Load file
-                    $spreadsheet = IOFactory::load($filePath);
+            //     // if(empty($datas)){
+            //     //     // Load file
+            //     //     $spreadsheet = IOFactory::load($filePath);
 
-                    // Lấy sheet đầu tiên
-                    $sheet = $spreadsheet->getActiveSheet();
+            //     //     // Lấy sheet đầu tiên
+            //     //     $sheet = $spreadsheet->getActiveSheet();
 
-                    // Lấy toàn bộ dữ liệu thành mảng
-                    $datas = $sheet->toArray();
+            //     //     // Lấy toàn bộ dữ liệu thành mảng
+            //     //     $datas = $sheet->toArray();
 
 
 
-                    // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
-                    $redis->set($redisKey,$datas);
-                }
+            //     //     // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
+            //     //     $redis->set($redisKey,$datas);
+            //     // }
 
-            }
-            // tắt tạm
+            // }
+
+
+            $spreadsheet = IOFactory::load($filePath);
+
+            // Lấy sheet đầu tiên
+            $sheet = $spreadsheet->getActiveSheet();
+
+            // Lấy toàn bộ dữ liệu thành mảng
+            $datas = $sheet->toArray();
+          
 
             // $key_ton = 'stock_data_'.$warehouse_id;
 
