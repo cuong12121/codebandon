@@ -319,6 +319,10 @@ $keyExists = $redis->exists($key_redis_push);
 
 <script>
 
+<?php 
+
+    dd($itemSummary);
+?>
 
 const disabledSkus = <?php echo json_encode($data_full); ?>;
 
