@@ -177,22 +177,22 @@ class completeOrderController extends Controller
             //     $inventory[$itemCode] = $quantity;
             // }
 
-            // $inventory_total = [];
+            $inventory_total = [];
 
-            // for ($i = 1; $i < count($datas); $i++) {
-            //     $itemCode = $datas[$i][0];
-            //     $quantity = (int) $datas[$i][1];
+            for ($i = 1; $i < count($datas); $i++) {
+                $itemCode = $datas[$i][0];
+                $quantity = (int) $datas[$i][1];
 
-            //     if (isset($inventory_total[$itemCode])) {
-            //         $inventory_total[$itemCode] += $quantity;
-            //     } else {
-            //         $inventory_total[$itemCode] = $quantity;
-            //     }
-            // }
+                if (isset($inventory_total[$itemCode])) {
+                    $inventory_total[$itemCode] += $quantity;
+                } else {
+                    $inventory_total[$itemCode] = $quantity;
+                }
+            }
             
 
             // $data_redis = $redis->get('stock_data_'.$warehouse_id);
-            $data_redis = json_encode($datas);
+            $data_redis = json_encode($inventory_total);
     
             $get_data['platform_id'] = $platform_id;
             $get_data['warehouse_id'] = $warehouse_id;
