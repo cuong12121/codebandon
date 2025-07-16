@@ -145,8 +145,10 @@ class completeOrderController extends Controller
                     // Lấy toàn bộ dữ liệu thành mảng
                     $datas = $sheet->toArray();
 
+                    dd($datas);
+
                     // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
-                    $redis->setex($redisKey, 600000,$datas);
+                    $redis->set($redisKey, 600000,$datas);
                 }
 
 
