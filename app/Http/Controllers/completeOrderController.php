@@ -203,7 +203,7 @@ class completeOrderController extends Controller
                 // Giải mã JSON
                 $response = json_decode($api_result, true);
 
-                dd($response);
+
 
 
 
@@ -212,7 +212,11 @@ class completeOrderController extends Controller
                 // Dữ liệu đã có trong cache
                 
             } else {
+
+
                $response = json_decode($cached_response, true);
+
+               dd($response);
             }
             $skuSummary = [];
 
