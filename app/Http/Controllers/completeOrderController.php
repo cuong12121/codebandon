@@ -254,7 +254,7 @@ class completeOrderController extends Controller
             ->values()
             ->all();
 
-            dd($data_redis['N009-PK-04']);
+            dd($data_redis);
 
            
             // Nếu có ID thì trả về view chi tiết
