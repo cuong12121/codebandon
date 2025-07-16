@@ -55,6 +55,7 @@
                 <th>Khung</th>
                 <th>Sàn</th>
                 <th>Kho</th>
+                <th>Ngày</th>
                 <th>Trạng thái</th>
                 <th>Thao tác</th>
             </tr>
@@ -127,6 +128,7 @@
                 <td>{{ $gio_array[$value['house_id']] }}</td>
                 <td>{{ $san_array[$value['platform_id']] }}</td>
                 <td>{{ $kho_array[$value['warehouse_id']] }}</td>
+                <td>{{ $datePart }}</td>
                 <td>{{ $keyExists?'Đã kiểm kê':'Chưa kiểm kê'  }}</td>
                 <td>
                     <a href="{{ route('show-print', $value['id']) }}?platform_id={{ $value['platform_id'] }}&warehouse_id={{ $value['warehouse_id'] }}&house_id={{ $value['house_id'] }}&created_time={{ $datePart }}">Duyệt hàng</a> 
