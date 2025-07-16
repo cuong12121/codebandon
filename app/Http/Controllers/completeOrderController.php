@@ -105,9 +105,10 @@ class completeOrderController extends Controller
 
         $filePath = storage_path('app/excels/tt.xlsx');
 
-        // Load file file tồn
-        
-       
+        $created_time = $_GET['created_time'];
+        $platform_id = $_GET['platform_id'];
+        $warehouse_id = $_GET['warehouse_id'];
+        $house_id = $_GET['house_id'];
 
         if ($id) {
 
@@ -152,10 +153,7 @@ class completeOrderController extends Controller
             }
             // tắt tạm
 
-            $created_time = $_GET['created_time'];
-            $platform_id = $_GET['platform_id'];
-            $warehouse_id = $_GET['warehouse_id'];
-            $house_id = $_GET['house_id'];
+            
 
             $key_ton = 'stock_data_'.$warehouse_id;
 
