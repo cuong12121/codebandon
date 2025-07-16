@@ -185,11 +185,9 @@ class completeOrderController extends Controller
             // Kiểm tra cache
             $cached_response = $redis->get($cache_key);
 
-            if ($cached_response || empty($cached_response)) {
-                // Dữ liệu đã có trong cache
-                $response = json_decode($cached_response, true);
-            } else {
-                // Chưa có cache, gọi API
+            if (empty($cached_response)) {
+
+                 // Chưa có cache, gọi API
                 $context = stream_context_create(array(
                     'http' => array(
                         'method' => 'GET',
@@ -209,6 +207,10 @@ class completeOrderController extends Controller
 
                 // Lưu vào Redis 10 phút (600 giây)
                 $redis->setex($cache_key, 1200, $api_result);
+                // Dữ liệu đã có trong cache
+                
+            } else {
+               $response = json_decode($cached_response, true);
             }
             $skuSummary = [];
 
