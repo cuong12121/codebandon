@@ -300,7 +300,7 @@ $keyExists = $redis->exists($key_redis_push);
                         array_push($data_full, $sku);
                         // lấy sku nào đã bắn xong để không cho bắn nữa
 
-                        $status = 'Đã bắn xong';
+                        $status = '<span style="color: green;">Đã bắn xong</span>';
                     }
                     else{
                         $status = 'Chưa bắn xong';
