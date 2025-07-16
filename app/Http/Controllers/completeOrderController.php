@@ -105,13 +105,13 @@ class completeOrderController extends Controller
 
         $filePath = storage_path('app/excels/tt.xlsx');
 
-        $created_time = $_GET['created_time'];
-        $platform_id = $_GET['platform_id'];
-        $warehouse_id = $_GET['warehouse_id'];
-        $house_id = $_GET['house_id'];
+        
 
         if ($id) {
-
+            $created_time = $_GET['created_time'];
+            $platform_id = $_GET['platform_id'];
+            $warehouse_id = $_GET['warehouse_id'];
+            $house_id = $_GET['house_id'];
             // Key Redis bạn muốn dùng
             $redisKey = 'stock_data_'.$warehouse_id;;
 
