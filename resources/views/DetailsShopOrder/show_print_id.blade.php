@@ -246,7 +246,7 @@ $keyExists = $redis->exists($key_redis_push);
         $kho_define = $_GET['warehouse_id'];
     ?>
 
-    <h1>Danh sách sản phẩm in kho {{ $kho_array[$kho_define] }}  khung {{ $gio_array[$gio] }} ngày {{ $created_time }}  </h1>
+    <h1>Danh sách sản phẩm in  {{ $kho_array[$kho_define] }}  khung {{ $gio_array[$gio] }} ngày {{ $created_time }}  </h1>
 
     <table>
         <thead>
