@@ -267,7 +267,7 @@ class completeOrderController extends Controller
 
 
             // Nếu có ID thì trả về view chi tiết
-            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>json_decode($data_redis,true), 'item_total'=>json_decode($data_redis,true), 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key,'warehouse_id'=>$get_data['warehouse_id', 'gio_array'=>$gio_array, 'kho_array'=>$kho_array, 'san_array'=>$san_array]]);
+            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>json_decode($data_redis,true), 'item_total'=>json_decode($data_redis,true), 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key,'warehouse_id'=>$get_data['warehouse_id'], 'gio_array'=>$gio_array, 'kho_array'=>$kho_array, 'san_array'=>$san_array]);
         } else {
             // Nếu không có ID thì trả về danh sách
             return view('DetailsShopOrder.show_post_print', compact('data','gio_array', 'kho_array', 'san_array'));
