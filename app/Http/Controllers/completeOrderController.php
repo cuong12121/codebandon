@@ -254,6 +254,8 @@ class completeOrderController extends Controller
             ->values()
             ->all();
 
+            dd($data_redis['N009-PK-04']);
+
            
             // Nếu có ID thì trả về view chi tiết
             return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>$data_redis, 'item_total'=>$data_redis, 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key,'warehouse_id'=>$get_data['warehouse_id']]);
