@@ -120,7 +120,7 @@ class completeOrderController extends Controller
             // Thử lấy từ Redis trước
             $data_redis = $redis->get($redisKey);
 
-            if(empty($data_redis)){
+            if(empty($data_redis)|| $data_redis=='null'){
                 $spreadsheet = IOFactory::load($filePath);
 
                 // Lấy sheet đầu tiên
