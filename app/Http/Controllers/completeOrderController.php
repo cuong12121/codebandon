@@ -151,13 +151,8 @@ class completeOrderController extends Controller
                     $redis->set($redisKey, 600000,$datas);
                 }
 
-                dd($datas);
-
-
             }
             // tắt tạm
-
-            
 
             $key_ton = 'stock_data_'.$warehouse_id;
 
@@ -165,7 +160,6 @@ class completeOrderController extends Controller
 
             // dd($datas);
 
-            
             // $inventory = [];
 
             // for ($i = 2; $i < count($datas); $i++) {
