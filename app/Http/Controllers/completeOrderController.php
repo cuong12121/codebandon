@@ -218,7 +218,7 @@ class completeOrderController extends Controller
 
 
             }
-            dd($data_redis);
+           
             $skuSummary = [];
 
 
