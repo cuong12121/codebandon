@@ -336,9 +336,9 @@ document.getElementById('skuForm').addEventListener('submit', function(e) {
         alert(`SKU "${sku}" đã bắn đủ số lượng, không thể bắn thêm, vui lòng kiểm tra lại.`);
         e.preventDefault(); // Chặn form submit
     }
-    if (isValid) {
-        alert(`SKU "${sku}" Đã bắn thành công!`);
-    }    
+    // if (isValid) {
+    //     alert(`SKU "${sku}" Đã bắn thành công!`);
+    // }    
 }); 
 
 document.getElementById('sku_replace').addEventListener('keydown', function(e) {
