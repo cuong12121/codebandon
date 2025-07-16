@@ -254,7 +254,7 @@ class completeOrderController extends Controller
             ->values()
             ->all();
 
-            dd($data_redis);
+            dd(json_decode($data_redis,true));
 
            
             // Nếu có ID thì trả về view chi tiết
