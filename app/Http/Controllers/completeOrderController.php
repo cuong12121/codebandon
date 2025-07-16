@@ -169,10 +169,6 @@ class completeOrderController extends Controller
 
 
 
-
-
-            dd($datas);
-
             // $inventory = [];
 
             // for ($i = 2; $i < count($datas); $i++) {
