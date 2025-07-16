@@ -154,11 +154,15 @@ class completeOrderController extends Controller
             }
             // tắt tạm
 
-            $key_ton = 'stock_data_'.$warehouse_id;
+            // $key_ton = 'stock_data_'.$warehouse_id;
 
-            $datas = json_decode($redis->get($key_ton), true);
+            // $datas = json_decode($redis->get($key_ton), true);
 
-            // dd($datas);
+
+
+            
+
+            dd($datas);
 
             // $inventory = [];
 
