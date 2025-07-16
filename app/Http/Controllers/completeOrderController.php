@@ -158,22 +158,22 @@ class completeOrderController extends Controller
 
             $data_json = urlencode($data_json);
 
-            $context = stream_context_create(array(
-                'http' => array(
-                    'method' => 'GET',
-                    'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
-                                "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
-                )
-            ));
+            // $context = stream_context_create(array(
+            //     'http' => array(
+            //         'method' => 'GET',
+            //         'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
+            //                     "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
+            //     )
+            // ));
 
-            $link_api = 'https://api.' . $domain . '/api/data-order-print?data=' . $data_json;
-            $api_result = file_get_contents($link_api, false, $context);
+            // $link_api = 'https://api.' . $domain . '/api/data-order-print?data=' . $data_json;
+            // $api_result = file_get_contents($link_api, false, $context);
 
            
-            // Giải mã JSON
-            $response = json_decode($api_result, true);
+            // // Giải mã JSON
+            // $response = json_decode($api_result, true);
 
-            dd($response);
+            // dd($response);
 
             // Kết nối Redis (giả sử dùng phpredis)
             
