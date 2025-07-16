@@ -398,7 +398,7 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
           input.readOnly = true;
 
           // Gộp vào container và thêm vào danh sách
-          container.appendChild(label);
+          
           container.appendChild(input);
           scannedListDiv.appendChild(container);
 
