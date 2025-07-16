@@ -327,15 +327,19 @@ document.getElementById('skuForm').addEventListener('submit', function(e) {
     const fullSku = <?php echo json_encode($full_sku); ?>;
 
     if (!fullSku.includes(sku)) {
+        isValid = false;
         alert(`SKU "${sku}" không tồn tại trong file in này.`);
         e.preventDefault();
     }    
     if (disabledSkus.includes(sku)) {
+        isValid = false;
         alert(`SKU "${sku}" đã bắn đủ số lượng, không thể bắn thêm, vui lòng kiểm tra lại.`);
         e.preventDefault(); // Chặn form submit
     }
-    alert(`SKU "${sku}" Đã bắn thành công!`);
-});
+    if (isValid) {
+        alert(`SKU "${sku}" Đã bắn thành công!`);
+    }    
+}); 
 
 document.getElementById('sku_replace').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
