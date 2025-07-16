@@ -115,7 +115,7 @@ class completeOrderController extends Controller
             // Key Redis bạn muốn dùng
             $redisKey = 'stock_data_'.$warehouse_id;;
 
-            $redis->del($redisKey);
+            // $redis->del($redisKey);
 
             // Thử lấy từ Redis trước
             $data_redis = $redis->get($redisKey);
