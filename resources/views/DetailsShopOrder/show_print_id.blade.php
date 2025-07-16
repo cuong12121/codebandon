@@ -173,6 +173,12 @@ $keyExists = $redis->exists($key_redis_push);
 
 <body>
     @if(!$keyExists)
+
+     @if (session('success'))
+        <div class="alert alert-success">
+            <span style="color:green;">{{ session('success') }}</span>
+        </div>
+    @endif
     <form id="skuForm" method="post" action="{{ route('push-sku') }}">
         @csrf
         <div class="form-group">
@@ -234,11 +240,7 @@ $keyExists = $redis->exists($key_redis_push);
         </table>
       </div>
     </div>
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+   
 
     <h1>Danh sách sản phẩm</h1>
 
@@ -382,10 +384,6 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
 
 
 </script>
-@if(session('success'))
-    <script>
-        alert(@json(session('success')));
-    </script>
-@endif
+
 </body>
 </html>
