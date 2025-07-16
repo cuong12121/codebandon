@@ -319,32 +319,39 @@ $keyExists = $redis->exists($key_redis_push);
 
 <script>
 
-<?php 
 
-    dd($itemSummary);
-?>
 
 const disabledSkus = <?php echo json_encode($data_full); ?>;
 
 document.getElementById('skuForm').addEventListener('submit', function(e) {
     const skuInput = document.getElementById('sku');
     const sku = skuInput.value.trim();
+    const quantityInput = document.getElementById('quantity');
+    
+    const itemSummary = <?php echo json_encode($itemSummary); ?>;
 
-    const fullSku = <?php echo json_encode($full_sku); ?>;
+    const quantity = parseInt(quantityInput.value.trim());
 
-    if (!fullSku.includes(sku)) {
+    if (itemSummary.hasOwnProperty(sku)) {
+        const maxQuantity = itemSummary[sku];
+
+        if (quantity > maxQuantity) {
+            alert("Số lượng sản phẩm đóng lớn hơn số lượng sản phẩm in");
+            e.preventDefault();
+        } 
+    } 
+    else{
         isValid = false;
         alert(`SKU "${sku}" không tồn tại trong file in này.`);
         e.preventDefault();
-    }    
+    }
+
     if (disabledSkus.includes(sku)) {
         isValid = false;
         alert(`SKU "${sku}" đã bắn đủ số lượng, không thể bắn thêm, vui lòng kiểm tra lại.`);
         e.preventDefault(); // Chặn form submit
     }
-    // if (isValid) {
-    //     alert(`SKU "${sku}" Đã bắn thành công!`);
-    // }    
+
 }); 
 
 document.getElementById('sku_replace').addEventListener('keydown', function(e) {
