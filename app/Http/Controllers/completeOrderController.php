@@ -216,8 +216,9 @@ class completeOrderController extends Controller
 
                $response = json_decode($cached_response, true);
 
-               dd($response);
+
             }
+            dd($response);
             $skuSummary = [];
 
 
