@@ -185,6 +185,8 @@ class completeOrderController extends Controller
                 // Giải mã JSON
                 $response = json_decode($api_result, true);
 
+                dd($response);
+
                 // Lưu vào Redis 10 phút (600 giây)
                 $redis->setex($cache_key, 1200, $api_result);
             }
