@@ -192,7 +192,7 @@ class completeOrderController extends Controller
             
 
             // $data_redis = $redis->get('stock_data_'.$warehouse_id);
-            $data_redis = $datas;
+            $data_redis = json_encode($datas);
     
             $get_data['platform_id'] = $platform_id;
             $get_data['warehouse_id'] = $warehouse_id;
