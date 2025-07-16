@@ -273,7 +273,8 @@ $keyExists = $redis->exists($key_redis_push);
                         echo "<span style='color: red;''>SKU {$item['sku_replace']} đang thay thế cho SKU {$item['sku']} với số lượng {$item['quantity']}</span><br>";
                     }
                 }
-                $full_sku = [];
+                $out_stock = [];
+
 
                
 
@@ -283,11 +284,12 @@ $keyExists = $redis->exists($key_redis_push);
                 $dem++;
                 $sku = $value['sku'].'-'.$value['color'].'-'.$value['size'];
 
-                array_push($full_sku, $sku);
+               
                 $result_push = !empty($datass[$sku]['quantity'])?$datass[$sku]['quantity']:0;
 
                 if(empty($item_total[$sku]) || $item_total[$sku]==0){
-                     $status = '<span style="color: red;">Hết hàng</span>';
+                    array_push($out_stock, $sku);
+                    $status = '<span style="color: red;">Hết hàng</span>';
                 }
                 else{
                     if(intval($result_push)===intval($itemSummary[$sku])){
@@ -330,6 +332,8 @@ document.getElementById('skuForm').addEventListener('submit', function(e) {
     
     const itemSummary = <?php echo json_encode($itemSummary); ?>;
 
+    const out_stock = <?php echo json_encode($out_stock); ?>
+
     const quantity = parseInt(quantityInput.value.trim());
 
     if (itemSummary.hasOwnProperty(sku)) {
@@ -349,6 +353,11 @@ document.getElementById('skuForm').addEventListener('submit', function(e) {
     if (disabledSkus.includes(sku)) {
         isValid = false;
         alert(`SKU "${sku}" đã bắn đủ số lượng, không thể bắn thêm, vui lòng kiểm tra lại.`);
+        e.preventDefault(); // Chặn form submit
+    }
+    if(out_stock.includes(sku)){
+         isValid = false;
+        alert(`SKU "${sku}" bắn bị sai mã, sản phẩm đã hết hàng.`);
         e.preventDefault(); // Chặn form submit
     }
 
