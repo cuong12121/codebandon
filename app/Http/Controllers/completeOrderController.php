@@ -152,7 +152,7 @@ class completeOrderController extends Controller
             $get_data['house_id'] = $house_id;
             $data_json = json_encode($get_data);
 
-            dd($data_json);
+            // dd($data_json);
 
             $data_json = urlencode($data_json);
 
