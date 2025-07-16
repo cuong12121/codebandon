@@ -172,12 +172,16 @@ $keyExists = $redis->exists($key_redis_push);
 
 
 <body>
+    <input type="text" id="barcodeInput" autofocus autocomplete="off" placeholder="Quét mã vạch tại đây...">
+
+    <!-- Danh sách kết quả -->
+    <div id="scannedList"></div>
     @if(!$keyExists)
     <form id="skuForm" method="post" action="{{ route('push-sku') }}">
         @csrf
         <div class="form-group">
           <label for="sku">SKU</label>
-          <input type="text" id="sku" name="sku" required autofocus>
+          <input type="text" id="sku" name="sku" required >
         </div>
 
         <div class="form-group">
@@ -365,6 +369,46 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
   function closePopup() {
     document.getElementById('popupOverlay').style.display = 'none';
   }  
+
+    const barcodeInput = document.getElementById('barcodeInput');
+    const scannedListDiv = document.getElementById('scannedList');
+    const barcodeList = [];
+
+    barcodeInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const code = barcodeInput.value.trim();
+        if (code !== '') {
+          // Thêm vào mảng
+          barcodeList.push(code);
+
+          // Tạo container cho dòng hiển thị
+          const container = document.createElement('div');
+          container.classList.add('scanned-item');
+
+          // Tạo label text
+          const label = document.createElement('span');
+          label.classList.add('scanned-label');
+          label.textContent = 'Đã quét:';
+
+          // Tạo input hiển thị mã
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.value = code;
+          input.readOnly = true;
+
+          // Gộp vào container và thêm vào danh sách
+          container.appendChild(label);
+          container.appendChild(input);
+          scannedListDiv.appendChild(container);
+
+          // Reset input
+          barcodeInput.value = '';
+        }
+      }
+    });
+
+    window.addEventListener('click', () => barcodeInput.focus());
 </script>
 </body>
 </html>
