@@ -105,6 +105,54 @@ class completeOrderController extends Controller
 
         $filePath = storage_path('app/excels/tt.xlsx');
 
+        $gio_array = [
+            0 => "-- Giờ --",
+            1 => "7H",
+            2 => "18H15",
+            3 => "8H",
+            4 => "8H30",
+            5 => "10H",
+            6 => "11H",
+            7 => "13H",
+            8 => "15H30",
+            9 => "9H",
+            10 => "14H",
+            11 => "15H",
+            12 => "16H",
+            13 => "7H10", // Value 13 tương ứng với 7H10
+            14 => "9H30", // Value 14 tương ứng với 9H30
+            15 => "14H30",
+            16 => "12H30",
+            17 => "22H",
+            18 => "12H40",
+            19 => "17H",
+            20 => "16H20",
+            21 => "18H"
+        ];
+        $kho_array = [
+            0 => "-- Kho --",
+            1 => "Kho Hà Nội",
+            2 => "Kho Hồ Chí Minh",
+            4 => "Kho hàng Cao Duy Hoan",
+            6 => "Kho Văn La",
+            7 => "Kho Văn Phú"
+        ];
+
+        $san_array = [
+            0 => "-- Sàn --",
+            1 => "Lazada",
+            2 => "Shopee",
+            3 => "Tiki",
+            4 => "Lex ngoài HCM",
+            6 => "Đơn ngoài",
+            8 => "Best",
+            9 => "Ticktok",
+            10 => "Viettel",
+            11 => "Shopee ngoài",
+            12 => "Giao hàng tiết kiệm",
+            13 => "Giao hàng nhanh"
+        ];
+
         
 
         if ($id) {
@@ -144,8 +192,6 @@ class completeOrderController extends Controller
                 $data_redis = json_encode($inventory_total);
             }
             
-
-          
             $get_data['platform_id'] = $platform_id;
             $get_data['warehouse_id'] = $warehouse_id;
             $get_data['created_time'] = $created_time;
@@ -157,25 +203,6 @@ class completeOrderController extends Controller
             // dd($data_json);
 
             $data_json = urlencode($data_json);
-
-            // $context = stream_context_create(array(
-            //     'http' => array(
-            //         'method' => 'GET',
-            //         'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
-            //                     "token: 7ojTLYXnzV0EH1wRGxOmvLFga",
-            //     )
-            // ));
-
-            // $link_api = 'https://api.' . $domain . '/api/data-order-print?data=' . $data_json;
-            // $api_result = file_get_contents($link_api, false, $context);
-
-           
-            // // Giải mã JSON
-            // $response = json_decode($api_result, true);
-
-            // dd($response);
-
-            // Kết nối Redis (giả sử dùng phpredis)
             
             $redis->connect('127.0.0.1', 6379); // hoặc host, port khác nếu cần
 
@@ -240,10 +267,10 @@ class completeOrderController extends Controller
 
 
             // Nếu có ID thì trả về view chi tiết
-            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>json_decode($data_redis,true), 'item_total'=>json_decode($data_redis,true), 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key,'warehouse_id'=>$get_data['warehouse_id']]);
+            return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>json_decode($data_redis,true), 'item_total'=>json_decode($data_redis,true), 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key,'warehouse_id'=>$get_data['warehouse_id', 'gio_array'=>$gio_array, 'kho_array'=>$kho_array, 'san_array'=>$san_array]]);
         } else {
             // Nếu không có ID thì trả về danh sách
-            return view('DetailsShopOrder.show_post_print', compact('data'));
+            return view('DetailsShopOrder.show_post_print', compact('data','gio_array', 'kho_array', 'san_array'));
         }
        
         
