@@ -118,82 +118,32 @@ class completeOrderController extends Controller
             // Thử lấy từ Redis trước
             $data_redis = $redis->get($redisKey);
 
-            // if (!$data_redis) {
-            //     // Load file
-            //     $spreadsheet = IOFactory::load($filePath);
+            if(empty($data_redis)){
+                $spreadsheet = IOFactory::load($filePath);
 
-            //     // Lấy sheet đầu tiên
-            //     $sheet = $spreadsheet->getActiveSheet();
+                // Lấy sheet đầu tiên
+                $sheet = $spreadsheet->getActiveSheet();
 
-            //     // Lấy toàn bộ dữ liệu thành mảng
-            //     $datas = $sheet->toArray();
+                // Lấy toàn bộ dữ liệu thành mảng
+                $datas = $sheet->toArray();
+              
+                $inventory_total = [];
 
-            //     // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
-            //     $redis->setex($redisKey, 600000, $datas);
-            // } else {
+                for ($i = 1; $i < count($datas); $i++) {
+                    $itemCode = $datas[$i][0];
+                    $quantity = (int) $datas[$i][1];
 
-            //     // Nếu có dữ liệu Redis rồi thì decode lại thành mảng
-            //     $datas = json_decode($data_redis, true);
-
-            //     // if(empty($datas)){
-            //     //     // Load file
-            //     //     $spreadsheet = IOFactory::load($filePath);
-
-            //     //     // Lấy sheet đầu tiên
-            //     //     $sheet = $spreadsheet->getActiveSheet();
-
-            //     //     // Lấy toàn bộ dữ liệu thành mảng
-            //     //     $datas = $sheet->toArray();
-
-
-
-            //     //     // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
-            //     //     $redis->set($redisKey,$datas);
-            //     // }
-
-            // }
-
-
-            $spreadsheet = IOFactory::load($filePath);
-
-            // Lấy sheet đầu tiên
-            $sheet = $spreadsheet->getActiveSheet();
-
-            // Lấy toàn bộ dữ liệu thành mảng
-            $datas = $sheet->toArray();
-          
-
-            // $key_ton = 'stock_data_'.$warehouse_id;
-
-            // $datas = json_decode($redis->get($key_ton), true);
-
-
-
-            // $inventory = [];
-
-            // for ($i = 2; $i < count($datas); $i++) {
-            //     $itemCode = $datas[$i][0];
-            //     $quantity = $datas[$i][1];
-            //     $inventory[$itemCode] = $quantity;
-            // }
-
-            $inventory_total = [];
-
-            for ($i = 1; $i < count($datas); $i++) {
-                $itemCode = $datas[$i][0];
-                $quantity = (int) $datas[$i][1];
-
-                if (isset($inventory_total[$itemCode])) {
-                    $inventory_total[$itemCode] += $quantity;
-                } else {
-                    $inventory_total[$itemCode] = $quantity;
+                    if (isset($inventory_total[$itemCode])) {
+                        $inventory_total[$itemCode] += $quantity;
+                    } else {
+                        $inventory_total[$itemCode] = $quantity;
+                    }
                 }
+                $data_redis = json_encode($inventory_total);
             }
             
 
-            // $data_redis = $redis->get('stock_data_'.$warehouse_id);
-            $data_redis = json_encode($inventory_total);
-    
+          
             $get_data['platform_id'] = $platform_id;
             $get_data['warehouse_id'] = $warehouse_id;
             $get_data['created_time'] = $created_time;
@@ -254,7 +204,7 @@ class completeOrderController extends Controller
             ->values()
             ->all();
 
-           
+
             // Nếu có ID thì trả về view chi tiết
             return view('DetailsShopOrder.show_print_id', ['id' => $id, 'data'=>$response, 'sku_quantity'=>json_decode($data_redis,true), 'item_total'=>json_decode($data_redis,true), 'itemSummary'=>$skuSummary, 'data_redis'=>$data_redisJs, 'cache_key'=>$cache_key,'warehouse_id'=>$get_data['warehouse_id']]);
         } else {
