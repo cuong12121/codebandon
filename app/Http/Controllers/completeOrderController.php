@@ -269,7 +269,7 @@ class completeOrderController extends Controller
 
         // Lưu lại
         $redis->set($key, json_encode($data));
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Bắn thành công SKU: ' . $sku);;
     }
 
     public function update_ton(Request $request)

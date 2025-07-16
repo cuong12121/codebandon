@@ -379,6 +379,13 @@ document.getElementById('confirm').addEventListener('submit', function(e) {
   function closePopup() {
     document.getElementById('popupOverlay').style.display = 'none';
   }  
+
+
 </script>
+@if(session('success'))
+    <script>
+        alert(@json(session('success')));
+    </script>
+@endif
 </body>
 </html>
