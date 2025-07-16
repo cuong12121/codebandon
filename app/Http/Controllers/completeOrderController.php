@@ -148,7 +148,7 @@ class completeOrderController extends Controller
 
 
                     // Lưu vào Redis, ví dụ: trong 10 phút (600 giây)
-                    $redis->set($redisKey, 600000,$datas);
+                    $redis->set($redisKey,$datas);
                 }
 
             }
@@ -160,7 +160,7 @@ class completeOrderController extends Controller
 
 
 
-            
+
 
             dd($datas);
 
